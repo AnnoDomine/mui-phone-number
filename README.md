@@ -1,229 +1,118 @@
 # mui-phone-number
 
-> **_NOTE:_**  I started this library because material-ui-phone-number took some time to upgrade to Material-ui v5. Now that some people are using this library, I feel like I should keep it up even if material-ui-phone-number has done a great job at upgrading and maintaning its library. I suggest you switch to material-ui-phone-number or if you feel like helping me maintaining this lib, let me know!. Thanks.
+Highly customizable phone input component for Material UI (MUI) v5+ with auto formatting. Written in TypeScript.
 
-Highly customizable phone input component with auto formatting. Based on the wonderful [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2) package.
-
-It looks like this, but in Material Design:
+Based on the wonderful [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2) package.
 
 ![alt tag](https://media.giphy.com/media/l378A8qFNzgiuPUre/giphy.gif)
 
-Uses @mui/material/TextField for rendering the phone input
+Uses `@mui/material/TextField` for rendering the phone input.
+
+## Features
+- Material UI v5+ support
+- Auto-formatting
+- TypeScript support
+- Country flags with dropdown
+- Searchable country list
+- Localization support
+- Custom themes support (Emotion)
 
 ## Installation
 
-```shell-script
-npm install mui-phone-number --save
+```shell
+# using pnpm
+pnpm add mui-phone-number
+
+# using npm
+npm install mui-phone-number
+
+# using yarn
+yarn add mui-phone-number
 ```
 
 ## Usage
 
-```jsx
+```tsx
 import MuiPhoneNumber from 'mui-phone-number';
 
-React.render(
-  <MuiPhoneNumber defaultCountry={'us'} onChange={handleOnChange}/>,
-  document.getElementById('root')
-);
+// ...
+<MuiPhoneNumber defaultCountry={'us'} onChange={handleOnChange}/>
 ```
 
-Your handler for the ``onChange`` event should expect a string as
-parameter, where the value is that of the entered phone number. For example:
+Your handler for the `onChange` event should expect a string as parameter, where the value is that of the entered phone number, and a second parameter with country data.
 
-```jsx
-function handleOnChange(value) {
-   this.setState({
-      phone: value
-   });
+```tsx
+function handleOnChange(value, countryData) {
+   console.log('Number:', value);
+   console.log('Country data:', countryData);
 }
 ```
 
 ## Options
-<table>
-  <tr>
-    <th> Name </th>
-    <th> Type </th>
-    <th> Description </th>
-    <th> Example </th>
-  </tr>
-  <tr>
-    <td> excludeCountries </td>
-    <td> array </td>
-    <td> array of country codes to be excluded </td>
-    <td> ['cu','cw','kz'] </td>
-  </tr>
-  <tr>
-    <td> onlyCountries </td>
-    <td> array </td>
-    <td> country codes to be included </td>
-    <td> ['cu','cw','kz'] </td>
-  </tr>
-  <tr>
-    <td> preferredCountries </td>
-    <td> array </td>
-    <td> country codes to be at the top </td>
-    <td> ['cu','cw','kz'] </td>
-  </tr>
-  <tr>
-    <td> defaultCountry </td>
-    <td> string </td>
-    <td> initial country </td>
-    <td> 'us' </td>
-  </tr>
-
-  <tr>
-    <td> inputClass </td>
-    <td> string </td>
-    <td colspan="2"> class for input </td>
-  </tr>
-  <tr>
-    <td> dropdownClass </td>
-    <td> string </td>
-    <td colspan="2"> class for dropdown container </td>
-  </tr>
-
-  <tr>
-    <td> autoFormat </td>
-    <td> bool </td>
-    <td colspan="2"> on/off auto formatting, true by default </td>
-  </tr>
-  <tr>
-    <td> disableAreaCodes </td>
-    <td> bool </td>
-    <td colspan="2"> disable local codes for all countries </td>
-  </tr>
-  <tr>
-    <td> disableCountryCode </td>
-    <td> bool </td>
-    <td colspan="2"> false by default </td>
-  </tr>
-  <tr>
-    <td> disableDropdown </td>
-    <td> bool </td>
-    <td colspan="2"> false by default </td>
-  </tr>
-  <tr>
-    <td> enableLongNumbers </td>
-    <td> bool </td>
-    <td colspan="2"> false by default </td>
-  </tr>
-  <tr>
-    <td> countryCodeEditable </td>
-    <td> bool </td>
-    <td colspan="2"> true by default </td>
-  </tr>
-
-  <tr>
-    <td colspan="4"><b>Supported TextField props</b></td>
-  </tr>
-
-  <tr>
-    <td colspan="4">See TextField API for possible values https://mui.com/api/text-field/</td>
-  </tr>
-</table>
+| Name | Type | Description | Example |
+| :--- | :--- | :--- | :--- |
+| `excludeCountries` | `string[]` | array of country codes to be excluded | `['cu','cw','kz']` |
+| `onlyCountries` | `string[]` | country codes to be included | `['cu','cw','kz']` |
+| `preferredCountries` | `string[]` | country codes to be at the top | `['us','gb']` |
+| `defaultCountry` | `string` | initial country code (iso2) | `'us'` |
+| `inputClass` | `string` | class for input | |
+| `dropdownClass` | `string` | class for dropdown container | |
+| `autoFormat` | `boolean` | on/off auto formatting, `true` by default | |
+| `disableAreaCodes` | `boolean` | disable local codes for all countries | |
+| `disableCountryCode` | `boolean` | disable country code in the input field | |
+| `disableDropdown` | `boolean` | disable country selection dropdown | |
+| `enableLongNumbers` | `boolean` | allow typing beyond the format | |
+| `countryCodeEditable`| `boolean` | allow editing country code | |
+| `native` | `boolean` | use native select for dropdown | |
 
 ### Regions
 
-<table>
-  <tr>
-    <th> Name </th>
-    <th> Type </th>
-    <th> Description </th>
-  </tr>
-  <tr>
-    <td> regions </td>
-    <td> array/string </td>
-    <td> to only show codes from selected regions </td>
-  </tr>
-</table>
+You can filter countries by regions or subregions.
 
-<table>
-  <tr>
-    <th> Regions </th>
-  </tr>
-  <tr>
-    <td> ['america', 'europe', 'asia', 'oceania', 'africa'] </td>
-  </tr>
-  <tr>
-    <th> Subregions </th>
-  </tr>
-  <tr>
-    <td> ['north-america', 'south-america', 'central-america', 'carribean', 'european-union', 'ex-ussr', 'middle-east', 'north-africa'] </td>
-  </tr>
-</table>
-
-Regions selected: {'europe'}
-```jsx
-<MuiPhoneInput
+```tsx
+<MuiPhoneNumber
   defaultCountry='it'
   regions={'europe'}
 />
-```
 
-Regions selected: {['north-america', 'carribean']}
-```jsx
-<MuiPhoneInput
+<MuiPhoneNumber
   defaultCountry='ca'
   regions={['north-america', 'carribean']}
 />
 ```
 
+Available regions: `['america', 'europe', 'asia', 'oceania', 'africa']`
+Available subregions: `['north-america', 'south-america', 'central-america', 'carribean', 'european-union', 'ex-ussr', 'middle-east', 'north-africa']`
+
 ### Localization
 
-<table>
-  <tr>
-    <th> Name </th>
-    <th> Type </th>
-  </tr>
-  <tr>
-    <td> localization </td>
-    <td> object </td>
-  </tr>
-</table>
-
-```jsx
-<MuiPhoneInput
-  onlyCountries=['de', 'es']
+```tsx
+<MuiPhoneNumber
+  onlyCountries={['de', 'es']}
   localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
 />
 ```
 
 ### Supported events
 
-<table>
-  <tr>
-    <td> onChange </td>
-    <td> onFocus </td>
-    <td> onBlur </td>
-    <td> onClick </td>
-    <td> onKeyDown </td>
-  </tr>
-</table>
+`onChange`, `onFocus`, `onBlur`, `onClick`, `onKeyDown`.
 
-Country data object not returns from onKeyDown event
+The `onChange` handler receives:
+1. `value`: `string` - the formatted phone number.
+2. `countryData`: `object` - `{ name, dialCode, countryCode }`.
 
-<table>
-  <tr>
-    <th> Data </th>
-    <th> Type </th>
-    <th> Description </th>
-  </tr>
-  <tr>
-    <td> value/event </td>
-    <td> string/object </td>
-    <td> the event or the phone number </td>
-  </tr>
-  <tr>
-    <td> country data </td>
-    <td> object </td>
-    <td> the country object { name, dialCode, country code (iso2 format) } </td>
-  </tr>
-</table>
+## Development
+
+This project uses `pnpm` and `Vite`.
+
+### Scripts
+- `pnpm dev`: Start dev server
+- `pnpm build`: Build the library
+- `pnpm test`: Run unit tests with Vitest
+- `pnpm lint`: Run Biome check
+- `pnpm format`: Run Biome format
+- `pnpm storybook`: Start Storybook
 
 ## License
 
-Based on [react-phone-input-2](https://github.com/bl00mber/react-phone-input-2)
-
-Based on [react-phone-input](https://github.com/razagill/react-phone-input) using [MIT](https://opensource.org/licenses/MIT)\
-
-Based on [material-ui-phone-number](https://github.com/alexplumb/material-ui-phone-number)
+MIT
