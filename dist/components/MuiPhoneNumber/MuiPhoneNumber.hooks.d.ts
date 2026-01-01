@@ -3,28 +3,24 @@ import { Country } from '../../country_data';
 import { MuiPhoneNumberProps } from './MuiPhoneNumber.types';
 
 export declare const useMuiPhoneNumber: (props: MuiPhoneNumberProps) => {
-    state: {
-        formattedNumber: string;
-        placeholder: string;
-        selectedCountry: Country;
-        highlightCountryIndex: number;
-        queryString: string;
-        freezeSelection: boolean;
-        anchorEl: HTMLElement | null;
-    };
-    setState: React.Dispatch<React.SetStateAction<{
-        formattedNumber: string;
-        placeholder: string;
-        selectedCountry: Country;
-        highlightCountryIndex: number;
-        queryString: string;
-        freezeSelection: boolean;
-        anchorEl: HTMLElement | null;
-    }>>;
+    formattedNumber: string;
+    selectedCountry: Country;
+    highlightCountryIndex: number;
+    queryString: string;
+    freezeSelection: boolean;
+    anchorEl: HTMLElement | null;
+    placeholder: string;
+    computedOnlyCountries: Country[];
+    computedPreferredCountries: Country[];
     flagsRef: React.RefObject<{
         [key: string]: HTMLElement | null;
     }>;
     inputRef: React.RefObject<HTMLInputElement | null>;
+    setAnchorEl: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
+    setHighlightCountryIndex: React.Dispatch<React.SetStateAction<number>>;
+    setQueryString: React.Dispatch<React.SetStateAction<string>>;
+    setFreezeSelection: React.Dispatch<React.SetStateAction<boolean>>;
+    setCurrentPlaceholder: React.Dispatch<React.SetStateAction<string>>;
     handleInput: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     handleInputClick: (e: React.MouseEvent<HTMLDivElement>) => void;
     handleInputFocus: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
@@ -33,7 +29,5 @@ export declare const useMuiPhoneNumber: (props: MuiPhoneNumberProps) => {
     handleInputKeyDown: (e: React.KeyboardEvent<HTMLDivElement>) => void;
     handleRefInput: (ref: HTMLInputElement) => void;
     handleFlagItemClick: (country: string | Country) => void;
-    computedOnlyCountries: Country[];
-    computedPreferredCountries: Country[];
     isValid: () => boolean;
 };

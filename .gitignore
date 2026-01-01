@@ -7,3 +7,4 @@ animation.gif
 *storybook.log
 storybook-static
 .gemini/
+dist/

@@ -52,7 +52,6 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
     anchorEl,
     flagsRef,
     // biome-ignore lint/correctness/noUnusedVariables: inputRef from hook is passed correctly to TextField as handleRefInput
-    inputRef,
     setAnchorEl,
     handleInput,
     handleInputClick,
