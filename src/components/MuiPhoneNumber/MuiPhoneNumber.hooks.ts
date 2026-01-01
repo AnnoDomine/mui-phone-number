@@ -349,13 +349,6 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
 
       let newFormattedNumber = disableCountryCode ? '' : '+';
 
-      console.log(
-        'handleInput called with value:',
-        e.target.value,
-        '\nCountry Code Editable:',
-        countryCodeEditable,
-      );
-
       if (!countryCodeEditable) {
         const updatedInput = `+${currentSelectedCountry.dialCode}`;
         if (e.target.value.length < updatedInput.length) {
@@ -373,12 +366,6 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
 
       if (e.target.value.length > 0) {
         const inputNumber = e.target.value.replace(/\D/g, '');
-        console.log('Processed input number:', inputNumber);
-        console.log(
-          'Guess?: ',
-          !freezeSelection,
-          selectedCountry.dialCode.length > inputNumber.length,
-        );
         if (
           !freezeSelection ||
           selectedCountry.dialCode.length > inputNumber.length
@@ -399,15 +386,9 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
       let caretPosition = e.target.selectionStart || 0;
       const diff = newFormattedNumber.length - formattedNumber.length;
 
-      console.log('Is modern browser:', isModernBrowser?.());
-      console.log('Caret position before adjustment:', caretPosition);
-      console.log('Formatted number:', formattedNumber);
-      console.log('New formatted number:', newFormattedNumber);
-
       if (isModernBrowser?.()) {
         requestAnimationFrame(() => {
           const input = inputRef.current;
-          console.log('Input ref in animation frame:', input);
           if (!input) return;
 
           if (diff > 0) {

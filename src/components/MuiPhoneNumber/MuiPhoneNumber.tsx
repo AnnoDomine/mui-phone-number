@@ -12,6 +12,38 @@ import Item from './components/Item/Item';
 import { useMuiPhoneNumber } from './MuiPhoneNumber.hooks';
 import type { FlagMap, MuiPhoneNumberProps } from './MuiPhoneNumber.types';
 
+const styles = {
+  flagButton: {
+    minWidth: 30,
+    padding: 0,
+    height: 30,
+  },
+  native: {
+    width: 30,
+    height: 30,
+    padding: 8,
+  },
+  nativeRoot: {
+    padding: 0,
+    '& + svg': {
+      display: 'none',
+    },
+  },
+  nativeSelect: {
+    padding: 0,
+    lineHeight: 0,
+    height: 11,
+  },
+  positionStart: {
+    position: 'relative' as const,
+  },
+  flagIcon: {
+    width: 30,
+    height: 24,
+    paddingRight: 8,
+  },
+};
+
 const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
   const {
     autoFormat,
@@ -63,38 +95,6 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
     computedPreferredCountries,
     isValid,
   } = useMuiPhoneNumber(props);
-
-  const styles = {
-    flagButton: {
-      minWidth: 30,
-      padding: 0,
-      height: 30,
-    },
-    native: {
-      width: 30,
-      height: 30,
-      padding: 8,
-    },
-    nativeRoot: {
-      padding: 0,
-      '& + svg': {
-        display: 'none',
-      },
-    },
-    nativeSelect: {
-      padding: 0,
-      lineHeight: 0,
-      height: 11,
-    },
-    positionStart: {
-      position: 'relative' as const,
-    },
-    flagIcon: {
-      width: 30,
-      height: 24,
-      paddingRight: 8,
-    },
-  };
 
   const isSelected = (country: Country) =>
     Boolean(selectedCountry && selectedCountry.dialCode === country.dialCode);
