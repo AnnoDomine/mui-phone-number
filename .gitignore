@@ -6,3 +6,4 @@ animation.gif
 .vscode/
 *storybook.log
 storybook-static
+.gemini/
