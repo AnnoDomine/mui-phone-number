@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: Any wanted */
 import type React from 'react';
 
 export interface ItemProps {

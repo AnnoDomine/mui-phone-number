@@ -1,6 +1,7 @@
 import MenuItem from '@mui/material/MenuItem';
 import * as Flags from 'country-flag-icons/react/3x2';
 import React from 'react';
+import type { FlagMap } from '../../MuiPhoneNumber.types';
 import type { ItemProps } from './Item.types';
 
 const Item: React.FC<ItemProps> = ({
@@ -20,7 +21,7 @@ const Item: React.FC<ItemProps> = ({
         data-country-code={iso2}
         value={iso2}
         {...restProps}
-        // Casting onClick as option doesn't support the specific MouseEvent from MenuItem props inheritance usually
+        // biome-ignore lint/suspicious/noExplicitAny: Casting onClick as option doesn't support the specific MouseEvent from MenuItem props inheritance usually
         onClick={restProps.onClick as any}
       >
         {localization || name} {`+${dialCode}`}
@@ -28,7 +29,7 @@ const Item: React.FC<ItemProps> = ({
     );
   }
 
-  const FlagComponent = (Flags as any)[iso2.toUpperCase()];
+  const FlagComponent = (Flags as FlagMap)[iso2.toUpperCase()];
 
   return (
     <MenuItem

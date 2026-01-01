@@ -86,13 +86,9 @@ if (rootElement) {
           marginTop: '35px',
         }}
       >
-        <p>
-          Custom region selected: {'europe'}
-        </p>
+        <p>Custom region selected: {'europe'}</p>
         <MaterialUiPhoneNumber defaultCountry="it" regions="europe" />
-        <p>
-          Custom regions selected: {['north-america', 'carribean']}
-        </p>
+        <p>Custom regions selected: {['north-america', 'carribean']}</p>
         <MaterialUiPhoneNumber
           defaultCountry="ca"
           regions={['north-america', 'carribean']}
@@ -117,4 +113,3 @@ if (rootElement) {
     </div>,
   );
 }
-

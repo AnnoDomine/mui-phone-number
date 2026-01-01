@@ -1,5 +1,5 @@
-import { TextFieldProps } from '@mui/material';
-import * as React from 'react';
+import type { TextFieldProps } from '@mui/material';
+import type * as React from 'react';
 import type { Country } from './country_data';
 
 export type { Country };

@@ -6,11 +6,11 @@ import NativeSelect from '@mui/material/NativeSelect';
 import TextField from '@mui/material/TextField';
 import * as Flags from 'country-flag-icons/react/3x2';
 import { map } from 'lodash';
-import React from 'react';
+import type React from 'react';
 import type { Country } from '../../country_data';
 import Item from './components/Item/Item';
 import { useMuiPhoneNumber } from './MuiPhoneNumber.hooks';
-import type { MuiPhoneNumberProps } from './MuiPhoneNumber.types';
+import type { FlagMap, MuiPhoneNumberProps } from './MuiPhoneNumber.types';
 
 const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
   const {
@@ -51,7 +51,6 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
     selectedCountry,
     anchorEl,
     flagsRef,
-    // biome-ignore lint/correctness/noUnusedVariables: inputRef from hook is passed correctly to TextField as handleRefInput
     setAnchorEl,
     handleInput,
     handleInputClick,
@@ -100,7 +99,8 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
   const isSelected = (country: Country) =>
     Boolean(selectedCountry && selectedCountry.dialCode === country.dialCode);
 
-  const FlagComponent = (Flags as any)[selectedCountry.iso2.toUpperCase()];
+  const FlagComponent =
+    (Flags as FlagMap)[selectedCountry.iso2.toUpperCase()] || undefined;
 
   const dropdownProps = disableDropdown
     ? {}
@@ -111,11 +111,8 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
               <NativeSelect
                 id="country-menu"
                 style={styles.native}
-                // biome-ignore lint/complexity/noUselessFragments: <explanation>
-                // open={Boolean(anchorEl)} - NativeSelect does not support open prop
-                // onClose={() => setAnchorEl(null)}
                 onChange={(e) => handleFlagItemClick(e.target.value)}
-                IconComponent={Boolean(FlagComponent) && FlagComponent}
+                IconComponent={FlagComponent}
                 disableUnderline
               >
                 {!!computedPreferredCountries.length &&

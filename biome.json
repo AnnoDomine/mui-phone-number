@@ -28,8 +28,10 @@
     "enabled": true,
     "actions": {
       "source": {
-        "organizeImports": "on"
-      }
+        "organizeImports": "on",
+        "recommended": true
+      },
+      "recommended": true
     }
   }
 }

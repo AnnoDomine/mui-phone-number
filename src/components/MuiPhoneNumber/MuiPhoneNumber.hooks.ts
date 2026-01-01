@@ -12,7 +12,8 @@ import {
   tail,
   trim,
 } from 'lodash';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type React from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import countryData, { type Country } from '../../country_data';
 import type { MuiPhoneNumberProps } from './MuiPhoneNumber.types';
 
@@ -145,7 +146,8 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
       );
     };
 
-    if (disableAreaCodes) filteredCountries = deleteAreaCodes(filteredCountries);
+    if (disableAreaCodes)
+      filteredCountries = deleteAreaCodes(filteredCountries);
     if (regions) filteredCountries = filterRegions(regions, filteredCountries);
 
     return excludeCountriesFunc(
@@ -219,7 +221,10 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
         localFormattedNumber = formattedObject.formattedText;
       }
 
-      if (localFormattedNumber.includes('(') && !localFormattedNumber.includes(')'))
+      if (
+        localFormattedNumber.includes('(') &&
+        !localFormattedNumber.includes(')')
+      )
         localFormattedNumber += ')';
       return localFormattedNumber;
     },
@@ -232,7 +237,8 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
   const [highlightCountryIndex, setHighlightCountryIndex] = useState(0);
   const [queryString, setQueryString] = useState('');
   const [freezeSelection, setFreezeSelection] = useState(false);
-  const [currentPlaceholder, setCurrentPlaceholder] = useState(propsPlaceholder);
+  const [currentPlaceholder, setCurrentPlaceholder] =
+    useState(propsPlaceholder);
 
   // -- Derived State (from props and internal UI state) --
 
@@ -277,23 +283,20 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
 
   // -- Handlers --
 
-  const getCountryData = useCallback(
-    (country: Country) => {
-      if (!country) return {} as Country;
-      return {
-        name: country.name || '',
-        dialCode: country.dialCode || '',
-        countryCode: country.iso2 || '',
-      } as unknown as Country;
-    },
-    [],
-  );
+  const getCountryData = useCallback((country: Country) => {
+    if (!country) return {} as Country;
+    return {
+      name: country.name || '',
+      dialCode: country.dialCode || '',
+      countryCode: country.iso2 || '',
+    } as unknown as Country;
+  }, []);
 
   const cursorToEnd = useCallback(() => {
     const input = inputRef.current;
     if (input) {
       input.focus();
-      if (isModernBrowser && isModernBrowser()) {
+      if (isModernBrowser?.()) {
         const len = input.value.length;
         input.setSelectionRange(len, len);
       }
@@ -303,7 +306,7 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
   const handleInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       let currentSelectedCountry = selectedCountry;
-      
+
       let newFormattedNumber = disableCountryCode ? '' : '+';
 
       if (!countryCodeEditable) {
@@ -334,13 +337,16 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
           ) as Country;
           setFreezeSelection(false);
         }
-        newFormattedNumber = formatDisplayedNumber(inputNumber, currentSelectedCountry.format);
+        newFormattedNumber = formatDisplayedNumber(
+          inputNumber,
+          currentSelectedCountry.format,
+        );
       }
 
       let caretPosition = e.target.selectionStart || 0;
       const diff = newFormattedNumber.length - formattedNumber.length;
 
-      if (isModernBrowser && isModernBrowser()) {
+      if (isModernBrowser?.()) {
         requestAnimationFrame(() => {
           const input = inputRef.current;
           if (!input) return;
@@ -349,7 +355,9 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
             caretPosition -= diff;
           }
 
-          const lastChar = newFormattedNumber.charAt(newFormattedNumber.length - 1);
+          const lastChar = newFormattedNumber.charAt(
+            newFormattedNumber.length - 1,
+          );
           if (lastChar === ')') {
             input.setSelectionRange(
               newFormattedNumber.length - 1,
@@ -386,7 +394,10 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
   const handleFlagItemClick = useCallback(
     (country: string | Country) => {
       const nextSelectedCountry = isString(country)
-        ? find(computedOnlyCountries, (countryItem) => countryItem.iso2 === country)
+        ? find(
+            computedOnlyCountries,
+            (countryItem) => countryItem.iso2 === country,
+          )
         : find(computedOnlyCountries, country);
 
       if (!nextSelectedCountry) return;
@@ -459,7 +470,7 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
     },
     [onClick, getCountryData, selectedCountry],
   );
-  
+
   const handleInputKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
       if (keys && e.which === keys.ENTER && onEnterKeyPress) {
@@ -479,24 +490,25 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
     countryElement.parentElement.scrollTop = countryElement.offsetTop;
   }, []);
 
-  const getHighlightCountryIndex = useCallback((direction: number) => {
-    const totalCount =
-      computedOnlyCountries.length + computedPreferredCountries.length;
-    let newIndex = highlightCountryIndex + direction;
+  const getHighlightCountryIndex = useCallback(
+    (direction: number) => {
+      const totalCount =
+        computedOnlyCountries.length + computedPreferredCountries.length;
+      let newIndex = highlightCountryIndex + direction;
 
-    if (newIndex < 0 || newIndex >= totalCount) {
-      newIndex -= direction;
-    }
-    return newIndex;
-  }, [highlightCountryIndex, computedOnlyCountries, computedPreferredCountries]);
+      if (newIndex < 0 || newIndex >= totalCount) {
+        newIndex -= direction;
+      }
+      return newIndex;
+    },
+    [highlightCountryIndex, computedOnlyCountries, computedPreferredCountries],
+  );
 
   const searchCountry = useCallback(() => {
     const getProbableCandidate = (searchQuery: string) => {
       if (!searchQuery || searchQuery.length === 0) return null;
-      return filter(
-        computedOnlyCountries,
-        (country) =>
-          startsWith(country.name.toLowerCase(), searchQuery.toLowerCase()),
+      return filter(computedOnlyCountries, (country) =>
+        startsWith(country.name.toLowerCase(), searchQuery.toLowerCase()),
       )[0];
     };
 
@@ -511,7 +523,12 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
 
     setQueryString('');
     setHighlightCountryIndex(newHighlightCountryIndex);
-  }, [queryString, computedOnlyCountries, computedPreferredCountries, scrollTo]);
+  }, [
+    queryString,
+    computedOnlyCountries,
+    computedPreferredCountries,
+    scrollTo,
+  ]);
 
   const debouncedSearchCountry = useMemo(
     () => debounce(searchCountry, 100),
@@ -519,6 +536,7 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
   );
 
   const handleKeydown = useCallback(
+    // biome-ignore lint/suspicious/noExplicitAny: event type --- IGNORE ---
     (e: any) => {
       if (!anchorEl || props.disabled || !keys) return;
 
@@ -586,12 +604,13 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
       inputRef.current = ref;
       if (props.inputRef) {
         if (typeof props.inputRef === 'function') props.inputRef(ref);
+        // biome-ignore lint/suspicious/noExplicitAny: inputRef could be any
         else (props.inputRef as any).current = ref;
       }
     },
     [props.inputRef],
   );
-  
+
   const checkIfValid = useCallback(() => {
     if (isValid) {
       return isValid(formattedNumber.replace(/\D/g, ''));
