@@ -1,3 +1,3 @@
-import { default as MaterialUiPhoneNumber } from './components/index';
+import { default as MaterialUiPhoneNumber } from './components/MuiPhoneNumber/MuiPhoneNumber';
 
 export default MaterialUiPhoneNumber;

@@ -1,274 +1,323 @@
-import U from "react";
-import he from "@mui/material/Divider";
-import pe from "@mui/material/IconButton";
-import ge from "@mui/material/InputAdornment";
-import Ce from "@mui/material/Menu";
-import be from "@mui/material/NativeSelect";
-import ye from "@mui/material/TextField";
-import * as de from "country-flag-icons/react/3x2";
-import { some as te, startsWith as k, memoize as ne, find as R, trim as ve, reduce as ie, filter as $, findIndex as oe, debounce as Se, includes as Ee, tail as Te, head as ke, isString as Re, map as A } from "lodash";
-import we from "@mui/material/MenuItem";
-var j = { exports: {} }, _ = {};
-var se;
-function xe() {
-  if (se) return _;
-  se = 1;
-  var S = /* @__PURE__ */ Symbol.for("react.transitional.element"), e = /* @__PURE__ */ Symbol.for("react.fragment");
-  function r(n, i, t) {
-    var o = null;
-    if (t !== void 0 && (o = "" + t), i.key !== void 0 && (o = "" + i.key), "key" in i) {
-      t = {};
-      for (var s in i)
-        s !== "key" && (t[s] = i[s]);
-    } else t = i;
-    return i = t.ref, {
-      $$typeof: S,
-      type: n,
-      key: o,
-      ref: i !== void 0 ? i : null,
-      props: t
+import ve, { useRef as fe, useMemo as se, useCallback as O, useState as Re, useEffect as le } from "react";
+import Te from "@mui/material/Divider";
+import ke from "@mui/material/IconButton";
+import _e from "@mui/material/InputAdornment";
+import we from "@mui/material/Menu";
+import xe from "@mui/material/NativeSelect";
+import Ne from "@mui/material/TextField";
+import * as ye from "country-flag-icons/react/3x2";
+import { some as pe, startsWith as Z, filter as ce, reduce as Ee, tail as Ie, head as Ae, find as X, isString as Pe, findIndex as je, debounce as Oe, includes as Me, trim as Fe, map as te } from "lodash";
+import ze from "@mui/material/MenuItem";
+var ie = { exports: {} }, ae = {};
+var he;
+function Be() {
+  if (he) return ae;
+  he = 1;
+  var m = /* @__PURE__ */ Symbol.for("react.transitional.element"), C = /* @__PURE__ */ Symbol.for("react.fragment");
+  function E(u, p, o) {
+    var h = null;
+    if (o !== void 0 && (h = "" + o), p.key !== void 0 && (h = "" + p.key), "key" in p) {
+      o = {};
+      for (var w in p)
+        w !== "key" && (o[w] = p[w]);
+    } else o = p;
+    return p = o.ref, {
+      $$typeof: m,
+      type: u,
+      key: h,
+      ref: p !== void 0 ? p : null,
+      props: o
     };
   }
-  return _.Fragment = e, _.jsx = r, _.jsxs = r, _;
+  return ae.Fragment = C, ae.jsx = E, ae.jsxs = E, ae;
 }
-var N = {};
-var le;
-function _e() {
-  return le || (le = 1, process.env.NODE_ENV !== "production" && (function() {
-    function S(a) {
-      if (a == null) return null;
-      if (typeof a == "function")
-        return a.$$typeof === z ? null : a.displayName || a.name || null;
-      if (typeof a == "string") return a;
-      switch (a) {
-        case E:
+var re = {};
+var ge;
+function $e() {
+  return ge || (ge = 1, process.env.NODE_ENV !== "production" && (function() {
+    function m(e) {
+      if (e == null) return null;
+      if (typeof e == "function")
+        return e.$$typeof === s ? null : e.displayName || e.name || null;
+      if (typeof e == "string") return e;
+      switch (e) {
+        case D:
           return "Fragment";
-        case Y:
-          return "Profiler";
-        case V:
-          return "StrictMode";
         case H:
+          return "Profiler";
+        case q:
+          return "StrictMode";
+        case M:
           return "Suspense";
-        case J:
+        case z:
           return "SuspenseList";
-        case O:
+        case N:
           return "Activity";
       }
-      if (typeof a == "object")
-        switch (typeof a.tag == "number" && console.error(
+      if (typeof e == "object")
+        switch (typeof e.tag == "number" && console.error(
           "Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."
-        ), a.$$typeof) {
-          case g:
+        ), e.$$typeof) {
+          case U:
             return "Portal";
-          case K:
-            return a.displayName || "Context";
-          case q:
-            return (a._context.displayName || "Context") + ".Consumer";
-          case W:
-            var c = a.render;
-            return a = a.displayName, a || (a = c.displayName || c.name || "", a = a !== "" ? "ForwardRef(" + a + ")" : "ForwardRef"), a;
-          case Z:
-            return c = a.displayName || null, c !== null ? c : S(a.type) || "Memo";
-          case w:
-            c = a._payload, a = a._init;
+          case V:
+            return e.displayName || "Context";
+          case Y:
+            return (e._context.displayName || "Context") + ".Consumer";
+          case L:
+            var i = e.render;
+            return e = e.displayName, e || (e = i.displayName || i.name || "", e = e !== "" ? "ForwardRef(" + e + ")" : "ForwardRef"), e;
+          case g:
+            return i = e.displayName || null, i !== null ? i : m(e.type) || "Memo";
+          case P:
+            i = e._payload, e = e._init;
             try {
-              return S(a(c));
+              return m(e(i));
             } catch {
             }
         }
       return null;
     }
-    function e(a) {
-      return "" + a;
+    function C(e) {
+      return "" + e;
     }
-    function r(a) {
+    function E(e) {
       try {
-        e(a);
-        var c = !1;
+        C(e);
+        var i = !1;
       } catch {
-        c = !0;
+        i = !0;
       }
-      if (c) {
-        c = console;
-        var f = c.error, C = typeof Symbol == "function" && Symbol.toStringTag && a[Symbol.toStringTag] || a.constructor.name || "Object";
+      if (i) {
+        i = console;
+        var f = i.error, y = typeof Symbol == "function" && Symbol.toStringTag && e[Symbol.toStringTag] || e.constructor.name || "Object";
         return f.call(
-          c,
+          i,
           "The provided key is an unsupported type %s. This value must be coerced to a string before using it here.",
-          C
-        ), e(a);
+          y
+        ), C(e);
       }
     }
-    function n(a) {
-      if (a === E) return "<>";
-      if (typeof a == "object" && a !== null && a.$$typeof === w)
+    function u(e) {
+      if (e === D) return "<>";
+      if (typeof e == "object" && e !== null && e.$$typeof === P)
         return "<...>";
       try {
-        var c = S(a);
-        return c ? "<" + c + ">" : "<...>";
+        var i = m(e);
+        return i ? "<" + i + ">" : "<...>";
       } catch {
         return "<...>";
       }
     }
-    function i() {
-      var a = x.A;
-      return a === null ? null : a.getOwner();
+    function p() {
+      var e = b.A;
+      return e === null ? null : e.getOwner();
     }
-    function t() {
+    function o() {
       return Error("react-stack-top-frame");
     }
-    function o(a) {
-      if (I.call(a, "key")) {
-        var c = Object.getOwnPropertyDescriptor(a, "key").get;
-        if (c && c.isReactWarning) return !1;
+    function h(e) {
+      if (F.call(e, "key")) {
+        var i = Object.getOwnPropertyDescriptor(e, "key").get;
+        if (i && i.isReactWarning) return !1;
       }
-      return a.key !== void 0;
+      return e.key !== void 0;
     }
-    function s(a, c) {
+    function w(e, i) {
       function f() {
-        X || (X = !0, console.error(
+        t || (t = !0, console.error(
           "%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)",
-          c
+          i
         ));
       }
-      f.isReactWarning = !0, Object.defineProperty(a, "key", {
+      f.isReactWarning = !0, Object.defineProperty(e, "key", {
         get: f,
         configurable: !0
       });
     }
-    function u() {
-      var a = S(this.type);
-      return Q[a] || (Q[a] = !0, console.error(
+    function k() {
+      var e = m(this.type);
+      return _[e] || (_[e] = !0, console.error(
         "Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."
-      )), a = this.props.ref, a !== void 0 ? a : null;
+      )), e = this.props.ref, e !== void 0 ? e : null;
     }
-    function d(a, c, f, C, P, F) {
-      var b = f.ref;
-      return a = {
-        $$typeof: h,
-        type: a,
-        key: c,
+    function S(e, i, f, y, J, a) {
+      var r = f.ref;
+      return e = {
+        $$typeof: G,
+        type: e,
+        key: i,
         props: f,
-        _owner: C
-      }, (b !== void 0 ? b : null) !== null ? Object.defineProperty(a, "ref", {
+        _owner: y
+      }, (r !== void 0 ? r : null) !== null ? Object.defineProperty(e, "ref", {
         enumerable: !1,
-        get: u
-      }) : Object.defineProperty(a, "ref", { enumerable: !1, value: null }), a._store = {}, Object.defineProperty(a._store, "validated", {
+        get: k
+      }) : Object.defineProperty(e, "ref", { enumerable: !1, value: null }), e._store = {}, Object.defineProperty(e._store, "validated", {
         configurable: !1,
         enumerable: !1,
         writable: !0,
         value: 0
-      }), Object.defineProperty(a, "_debugInfo", {
+      }), Object.defineProperty(e, "_debugInfo", {
         configurable: !1,
         enumerable: !1,
         writable: !0,
         value: null
-      }), Object.defineProperty(a, "_debugStack", {
+      }), Object.defineProperty(e, "_debugStack", {
         configurable: !1,
         enumerable: !1,
         writable: !0,
-        value: P
-      }), Object.defineProperty(a, "_debugTask", {
+        value: J
+      }), Object.defineProperty(e, "_debugTask", {
         configurable: !1,
         enumerable: !1,
         writable: !0,
-        value: F
-      }), Object.freeze && (Object.freeze(a.props), Object.freeze(a)), a;
+        value: a
+      }), Object.freeze && (Object.freeze(e.props), Object.freeze(e)), e;
     }
-    function m(a, c, f, C, P, F) {
-      var b = c.children;
-      if (b !== void 0)
-        if (C)
-          if (me(b)) {
-            for (C = 0; C < b.length; C++)
-              p(b[C]);
-            Object.freeze && Object.freeze(b);
+    function B(e, i, f, y, J, a) {
+      var r = i.children;
+      if (r !== void 0)
+        if (y)
+          if (I(r)) {
+            for (y = 0; y < r.length; y++)
+              x(r[y]);
+            Object.freeze && Object.freeze(r);
           } else
             console.error(
               "React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead."
             );
-        else p(b);
-      if (I.call(c, "key")) {
-        b = S(a);
-        var T = Object.keys(c).filter(function(fe) {
-          return fe !== "key";
+        else x(r);
+      if (F.call(i, "key")) {
+        r = m(e);
+        var n = Object.keys(i).filter(function(c) {
+          return c !== "key";
         });
-        C = 0 < T.length ? "{key: someKey, " + T.join(": ..., ") + ": ...}" : "{key: someKey}", re[b + C] || (T = 0 < T.length ? "{" + T.join(": ..., ") + ": ...}" : "{}", console.error(
+        y = 0 < n.length ? "{key: someKey, " + n.join(": ..., ") + ": ...}" : "{key: someKey}", K[r + y] || (n = 0 < n.length ? "{" + n.join(": ..., ") + ": ...}" : "{}", console.error(
           `A props object containing a "key" prop is being spread into JSX:
   let props = %s;
   <%s {...props} />
 React keys must be passed directly to JSX without using spread:
   let props = %s;
   <%s key={someKey} {...props} />`,
-          C,
-          b,
-          T,
-          b
-        ), re[b + C] = !0);
+          y,
+          r,
+          n,
+          r
+        ), K[r + y] = !0);
       }
-      if (b = null, f !== void 0 && (r(f), b = "" + f), o(c) && (r(c.key), b = "" + c.key), "key" in c) {
+      if (r = null, f !== void 0 && (E(f), r = "" + f), h(i) && (E(i.key), r = "" + i.key), "key" in i) {
         f = {};
-        for (var B in c)
-          B !== "key" && (f[B] = c[B]);
-      } else f = c;
-      return b && s(
+        for (var l in i)
+          l !== "key" && (f[l] = i[l]);
+      } else f = i;
+      return r && w(
         f,
-        typeof a == "function" ? a.displayName || a.name || "Unknown" : a
-      ), d(
-        a,
-        b,
+        typeof e == "function" ? e.displayName || e.name || "Unknown" : e
+      ), S(
+        e,
+        r,
         f,
-        i(),
-        P,
-        F
+        p(),
+        J,
+        a
       );
     }
-    function p(a) {
-      v(a) ? a._store && (a._store.validated = 1) : typeof a == "object" && a !== null && a.$$typeof === w && (a._payload.status === "fulfilled" ? v(a._payload.value) && a._payload.value._store && (a._payload.value._store.validated = 1) : a._store && (a._store.validated = 1));
+    function x(e) {
+      $(e) ? e._store && (e._store.validated = 1) : typeof e == "object" && e !== null && e.$$typeof === P && (e._payload.status === "fulfilled" ? $(e._payload.value) && e._payload.value._store && (e._payload.value._store.validated = 1) : e._store && (e._store.validated = 1));
     }
-    function v(a) {
-      return typeof a == "object" && a !== null && a.$$typeof === h;
+    function $(e) {
+      return typeof e == "object" && e !== null && e.$$typeof === G;
     }
-    var l = U, h = /* @__PURE__ */ Symbol.for("react.transitional.element"), g = /* @__PURE__ */ Symbol.for("react.portal"), E = /* @__PURE__ */ Symbol.for("react.fragment"), V = /* @__PURE__ */ Symbol.for("react.strict_mode"), Y = /* @__PURE__ */ Symbol.for("react.profiler"), q = /* @__PURE__ */ Symbol.for("react.consumer"), K = /* @__PURE__ */ Symbol.for("react.context"), W = /* @__PURE__ */ Symbol.for("react.forward_ref"), H = /* @__PURE__ */ Symbol.for("react.suspense"), J = /* @__PURE__ */ Symbol.for("react.suspense_list"), Z = /* @__PURE__ */ Symbol.for("react.memo"), w = /* @__PURE__ */ Symbol.for("react.lazy"), O = /* @__PURE__ */ Symbol.for("react.activity"), z = /* @__PURE__ */ Symbol.for("react.client.reference"), x = l.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, I = Object.prototype.hasOwnProperty, me = Array.isArray, M = console.createTask ? console.createTask : function() {
+    var A = ve, G = /* @__PURE__ */ Symbol.for("react.transitional.element"), U = /* @__PURE__ */ Symbol.for("react.portal"), D = /* @__PURE__ */ Symbol.for("react.fragment"), q = /* @__PURE__ */ Symbol.for("react.strict_mode"), H = /* @__PURE__ */ Symbol.for("react.profiler"), Y = /* @__PURE__ */ Symbol.for("react.consumer"), V = /* @__PURE__ */ Symbol.for("react.context"), L = /* @__PURE__ */ Symbol.for("react.forward_ref"), M = /* @__PURE__ */ Symbol.for("react.suspense"), z = /* @__PURE__ */ Symbol.for("react.suspense_list"), g = /* @__PURE__ */ Symbol.for("react.memo"), P = /* @__PURE__ */ Symbol.for("react.lazy"), N = /* @__PURE__ */ Symbol.for("react.activity"), s = /* @__PURE__ */ Symbol.for("react.client.reference"), b = A.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, F = Object.prototype.hasOwnProperty, I = Array.isArray, W = console.createTask ? console.createTask : function() {
       return null;
     };
-    l = {
-      react_stack_bottom_frame: function(a) {
-        return a();
+    A = {
+      react_stack_bottom_frame: function(e) {
+        return e();
       }
     };
-    var X, Q = {}, ee = l.react_stack_bottom_frame.bind(
-      l,
-      t
-    )(), ae = M(n(t)), re = {};
-    N.Fragment = E, N.jsx = function(a, c, f) {
-      var C = 1e4 > x.recentlyCreatedOwnerStacks++;
-      return m(
-        a,
-        c,
+    var t, _ = {}, j = A.react_stack_bottom_frame.bind(
+      A,
+      o
+    )(), ne = W(u(o)), K = {};
+    re.Fragment = D, re.jsx = function(e, i, f) {
+      var y = 1e4 > b.recentlyCreatedOwnerStacks++;
+      return B(
+        e,
+        i,
         f,
         !1,
-        C ? Error("react-stack-top-frame") : ee,
-        C ? M(n(a)) : ae
+        y ? Error("react-stack-top-frame") : j,
+        y ? W(u(e)) : ne
       );
-    }, N.jsxs = function(a, c, f) {
-      var C = 1e4 > x.recentlyCreatedOwnerStacks++;
-      return m(
-        a,
-        c,
+    }, re.jsxs = function(e, i, f) {
+      var y = 1e4 > b.recentlyCreatedOwnerStacks++;
+      return B(
+        e,
+        i,
         f,
         !0,
-        C ? Error("react-stack-top-frame") : ee,
-        C ? M(n(a)) : ae
+        y ? Error("react-stack-top-frame") : j,
+        y ? W(u(e)) : ne
       );
     };
-  })()), N;
+  })()), re;
 }
-var ue;
-function Ne() {
-  return ue || (ue = 1, process.env.NODE_ENV === "production" ? j.exports = xe() : j.exports = _e()), j.exports;
+var be;
+function De() {
+  return be || (be = 1, process.env.NODE_ENV === "production" ? ie.exports = Be() : ie.exports = $e()), ie.exports;
 }
-var y = Ne();
-const Ie = [
+var T = De();
+const Le = ({
+  name: m,
+  iso2: C,
+  dialCode: E,
+  localization: u,
+  itemRef: p,
+  native: o = !1,
+  ...h
+}) => {
+  if (o)
+    return /* @__PURE__ */ T.jsxs(
+      "option",
+      {
+        className: "country",
+        "data-dial-code": "1",
+        "data-country-code": C,
+        value: C,
+        ...h,
+        onClick: h.onClick,
+        children: [
+          u || m,
+          " ",
+          `+${E}`
+        ]
+      }
+    );
+  const w = ye[C.toUpperCase()];
+  return /* @__PURE__ */ T.jsxs(
+    ze,
+    {
+      ref: p,
+      className: "country",
+      "data-dial-code": "1",
+      "data-country-code": C,
+      ...h,
+      children: [
+        !!w && /* @__PURE__ */ T.jsx(
+          "div",
+          {
+            className: h.className,
+            style: { width: 30, height: 24, paddingRight: 8 },
+            children: /* @__PURE__ */ T.jsx(w, {})
+          }
+        ),
+        /* @__PURE__ */ T.jsx("span", { className: "country-name", children: u || m }),
+        /* @__PURE__ */ T.jsx("span", { className: "dial-code", children: `+${E}` })
+      ]
+    }
+  );
+}, oe = ve.memo(Le), Ge = [
   ["Afghanistan", ["asia"], "af", "93"],
   ["Albania", ["europe"], "al", "355"],
   ["Algeria", ["africa", "north-africa"], "dz", "213"],
@@ -865,128 +914,59 @@ const Ie = [
   ["Yemen", ["middle-east"], "ye", "967"],
   ["Zambia", ["africa"], "zm", "260"],
   ["Zimbabwe", ["africa"], "zw", "263"]
-], L = {};
-function ce(S, e, r) {
-  e in L || (L[e] = []);
-  const n = r || 0;
-  L[e][n] = S;
+], ue = {};
+function Ce(m, C, E) {
+  C in ue || (ue[C] = []);
+  const u = E || 0;
+  ue[C][u] = m;
 }
-const Pe = [].concat(
-  ...Ie.map((S) => {
-    const [e, r, n, i, t, o, s] = S, u = {
-      name: e,
-      regions: r,
-      iso2: n,
-      dialCode: i,
-      priority: o || 0,
-      format: t || void 0,
-      hasAreaCodes: !!s
-    }, d = [];
-    return u.hasAreaCodes && s && s.forEach((m) => {
-      const p = {
-        ...u,
-        regions: r,
-        dialCode: `${i}${m}`,
+const Ue = [].concat(
+  ...Ge.map((m) => {
+    const [C, E, u, p, o, h, w] = m, k = {
+      name: C,
+      regions: E,
+      iso2: u,
+      dialCode: p,
+      priority: h || 0,
+      format: o || void 0,
+      hasAreaCodes: !!w
+    }, S = [];
+    return k.hasAreaCodes && w && w.forEach((B) => {
+      const x = {
+        ...k,
+        regions: E,
+        dialCode: `${p}${B}`,
         isAreaCode: !0
       };
-      d.push(p), ce(n, p.dialCode);
-    }), ce(
-      u.iso2,
-      u.dialCode,
-      u.hasAreaCodes ? 1 : 0
-    ), d.length > 0 ? [u, ...d] : [u];
+      S.push(x), Ce(u, x.dialCode);
+    }), Ce(
+      k.iso2,
+      k.dialCode,
+      k.hasAreaCodes ? 1 : 0
+    ), S.length > 0 ? [k, ...S] : [k];
   })
-), G = {
-  allCountries: Pe
-};
-class D extends U.PureComponent {
-  static defaultProps = {
-    localization: null,
-    native: !1
-  };
-  render() {
-    const {
-      name: e,
-      iso2: r,
-      dialCode: n,
-      localization: i,
-      itemRef: t,
-      native: o,
-      ...s
-    } = this.props;
-    if (o)
-      return /* @__PURE__ */ y.jsxs(
-        "option",
-        {
-          className: "country",
-          "data-dial-code": "1",
-          "data-country-code": r,
-          value: r,
-          ...s,
-          onClick: s.onClick,
-          children: [
-            i || e,
-            " ",
-            `+${n}`
-          ]
-        }
-      );
-    const u = de[r.toUpperCase()];
-    return /* @__PURE__ */ y.jsxs(
-      we,
-      {
-        ref: t,
-        className: "country",
-        "data-dial-code": "1",
-        "data-country-code": r,
-        ...s,
-        children: [
-          !!u && /* @__PURE__ */ y.jsx(
-            "div",
-            {
-              className: s.className,
-              style: { width: 30, height: 24, paddingRight: 8 },
-              children: /* @__PURE__ */ y.jsx(u, {})
-            }
-          ),
-          /* @__PURE__ */ y.jsx("span", { className: "country-name", children: i || e }),
-          /* @__PURE__ */ y.jsx("span", { className: "dial-code", children: `+${n}` })
-        ]
-      }
-    );
-  }
-}
-class Le extends U.Component {
-  static defaultProps = {
-    excludeCountries: [],
-    onlyCountries: [],
-    preferredCountries: [],
-    defaultCountry: "",
-    placeholder: "+1 (702) 123-4567",
-    disabled: !1,
-    error: !1,
-    variant: "standard",
-    native: !1,
-    inputClass: "",
-    dropdownClass: "",
-    autoFormat: !0,
-    disableAreaCodes: !1,
-    isValid: (e) => te(
-      G.allCountries,
-      (r) => k(e, r.dialCode) || k(r.dialCode, e)
-    ),
-    disableCountryCode: !1,
-    disableDropdown: !1,
-    enableLongNumbers: !1,
-    countryCodeEditable: !0,
-    regions: "",
-    localization: {},
-    onEnterKeyPress: () => {
-    },
-    onChange: () => {
-    },
-    isModernBrowser: () => document.createElement ? !!document.createElement("input").setSelectionRange : !1,
-    keys: {
+), de = {
+  allCountries: Ue
+}, me = (m, C, E) => {
+  const u = X(C, { iso2: E }) || {};
+  if (Fe(m) === "") return u;
+  const p = Ee(
+    C,
+    (o, h) => Z(m, h.dialCode) && (h.dialCode.length > o.dialCode.length || h.dialCode.length === o.dialCode.length && h.priority < o.priority) ? h : o,
+    { dialCode: "", priority: 10001 }
+  );
+  return p.name ? p : u;
+}, qe = (m) => {
+  const {
+    autoFormat: C = !0,
+    countryCodeEditable: E = !0,
+    defaultCountry: u = "",
+    disableAreaCodes: p = !1,
+    disableCountryCode: o = !1,
+    enableLongNumbers: h = !1,
+    excludeCountries: w = [],
+    isModernBrowser: k = () => document.createElement ? !!document.createElement("input").setSelectionRange : !1,
+    keys: S = {
       UP: 38,
       DOWN: 40,
       RIGHT: 39,
@@ -997,540 +977,529 @@ class Le extends U.Component {
       A: 65,
       Z: 90,
       SPACE: 32
-    }
-  };
-  static displayName = "MuiPhoneNumber";
-  flags = {};
-  inputRef = null;
-  dropdownContainerRef = null;
-  guessSelectedCountry = ne(
-    (e, r, n) => {
-      const i = R(r, { iso2: n }) || {};
-      if (ve(e) === "") return i;
-      const t = ie(
-        r,
-        (o, s) => k(e, s.dialCode) && (s.dialCode.length > o.dialCode.length || s.dialCode.length === o.dialCode.length && s.priority < o.priority) ? s : o,
-        { dialCode: "", priority: 10001 }
-      );
-      return t.name ? t : i;
-    }
-  );
-  constructor(e) {
-    super(e);
-    let r = G.allCountries;
-    e.disableAreaCodes && (r = this.deleteAreaCodes(r)), e.regions && (r = this.filterRegions(e.regions, r));
-    const n = this.excludeCountries(
-      this.getOnlyCountries(e.onlyCountries || [], r),
-      e.excludeCountries || []
-    ), i = $(
-      r,
-      (m) => te(
-        e.preferredCountries,
-        (p) => p === m.iso2
-      )
-    ), t = e.value || "";
-    let o;
-    t.length > 1 ? o = this.guessSelectedCountry(
-      t.replace(/\D/g, "").substring(0, 6),
-      n,
-      e.defaultCountry || ""
-    ) || {} : e.defaultCountry && (o = R(n, { iso2: e.defaultCountry })), (!o || !o.dialCode) && (o = { dialCode: "", priority: 10001 });
-    const s = oe(G.allCountries, o), u = t.length < 2 && o && o.dialCode && !k(t.replace(/\D/g, ""), o.dialCode) ? o.dialCode : "", d = t === "" && (!o || !o.name) ? "" : this.formatNumber(
-      (e.disableCountryCode ? "" : u) + t.replace(/\D/g, ""),
-      o.name ? o.format : void 0
+    },
+    onlyCountries: B = [],
+    onChange: x,
+    onEnterKeyPress: $,
+    onKeyDown: A,
+    onBlur: G,
+    onFocus: U,
+    onClick: D,
+    placeholder: q = "+1 (702) 123-4567",
+    preferredCountries: H = [],
+    regions: Y = "",
+    isValid: V = (a) => pe(
+      de.allCountries,
+      (r) => Z(a, r.dialCode) || Z(r.dialCode, a)
+    ),
+    value: L = ""
+  } = m, M = fe({}), z = fe(null), g = se(() => {
+    let a = de.allCountries;
+    const r = (d) => d.filter((v) => v.isAreaCode !== !0), n = (d, v) => {
+      if (typeof d == "string") {
+        const R = d;
+        return v.filter(
+          (Q) => Q.regions.some((ee) => ee === R)
+        );
+      }
+      return v.filter((R) => d.map(
+        (ee) => R.regions.some((Se) => Se === ee)
+      ).some((ee) => ee));
+    }, l = (d, v) => d.length === 0 ? v : v.filter(
+      (R) => d.some((Q) => Q === R.iso2)
+    ), c = (d, v) => v.length === 0 ? d : ce(
+      d,
+      (R) => !Me(v, R.iso2)
     );
-    this.state = {
-      formattedNumber: d,
-      placeholder: e.placeholder || "",
-      onlyCountries: n,
-      preferredCountries: i,
-      defaultCountry: e.defaultCountry || "",
-      selectedCountry: o,
-      highlightCountryIndex: s,
+    return p && (a = r(a)), Y && (a = n(Y, a)), c(
+      l(B, a),
+      w
+    );
+  }, [p, Y, B, w]), P = se(() => ce(
+    de.allCountries,
+    (a) => pe(
+      H,
+      (r) => r === a.iso2
+    )
+  ), [H]), N = O(
+    (a, r) => {
+      let n = "";
+      if (o && r ? n = r.split(" ").slice(1).join(" ") : n = r, !a || a.length === 0)
+        return o ? "" : "+";
+      if (a && a.length < 2 || !n || !C)
+        return o ? a : `+${a}`;
+      const l = Ee(
+        n,
+        (d, v) => d.remainingText.length === 0 ? d : v !== "." ? {
+          formattedText: d.formattedText + v,
+          remainingText: d.remainingText
+        } : {
+          formattedText: d.formattedText + Ae(d.remainingText),
+          remainingText: Ie(d.remainingText)
+        },
+        {
+          formattedText: "",
+          remainingText: a.split("")
+        }
+      );
+      let c = "";
+      return h ? c = l.formattedText + l.remainingText.join("") : c = l.formattedText, c.includes("(") && !c.includes(")") && (c += ")"), c;
+    },
+    [o, C, h]
+  ), [s, b] = Re(() => {
+    const a = L || "";
+    let r;
+    a.length > 1 ? r = me(
+      a.replace(/\D/g, "").substring(0, 6),
+      g,
+      u
+    ) || {} : u && (r = X(g, { iso2: u })), (!r || !r.dialCode) && (r = { dialCode: "", priority: 10001 });
+    const n = a.length < 2 && r && r.dialCode && !Z(a.replace(/\D/g, ""), r.dialCode) ? r.dialCode : "";
+    return {
+      formattedNumber: a === "" && (!r || !r.name) ? "" : N(
+        (o ? "" : n) + a.replace(/\D/g, ""),
+        r.name ? r.format : void 0
+      ),
+      placeholder: q || "",
+      selectedCountry: r,
+      highlightCountryIndex: 0,
       queryString: "",
       freezeSelection: !1,
-      debouncedQueryStingSearcher: Se(this.searchCountry, 100),
       anchorEl: null
     };
-  }
-  componentDidMount() {
-    document.addEventListener && document.addEventListener("keydown", this.handleKeydown);
-  }
-  componentDidUpdate(e) {
-    const { defaultCountry: r, formattedNumber: n } = this.state, { defaultCountry: i, value: t } = this.props;
-    i && i !== r && this.updateDefaultCountry(i), typeof t == "string" && t !== e.value && t !== n && this.updateFormattedNumber(t);
-  }
-  componentWillUnmount() {
-    document.removeEventListener && document.removeEventListener("keydown", this.handleKeydown);
-  }
-  getProbableCandidate = ne((e) => {
-    if (!e || e.length === 0)
-      return null;
-    const { onlyCountries: r } = this.state;
-    return $(
-      r,
-      (i) => k(i.name.toLowerCase(), e.toLowerCase())
-    )[0];
   });
-  getOnlyCountries = (e, r) => e.length === 0 ? r : r.filter(
-    (n) => e.some((i) => i === n.iso2)
-  );
-  excludeCountries = (e, r) => r.length === 0 ? e : $(
-    e,
-    (n) => !Ee(r, n.iso2)
-  );
-  filterRegions = (e, r) => {
-    if (typeof e == "string") {
-      const n = e;
-      return r.filter(
-        (i) => i.regions.some((t) => t === n)
-      );
+  le(() => {
+    if (u && u !== s.selectedCountry.iso2) {
+      const a = X(g, { iso2: u }) || {};
+      b((r) => ({
+        ...r,
+        selectedCountry: a,
+        formattedNumber: o ? "" : `+${a.dialCode}`
+      }));
     }
-    return r.filter((n) => e.map(
-      (t) => n.regions.some((o) => o === t)
-    ).some((t) => t));
-  };
-  // Countries array methods
-  deleteAreaCodes = (e) => e.filter((r) => r.isAreaCode !== !0);
-  // Hooks for updated props
-  updateDefaultCountry = (e) => {
-    const { onlyCountries: r } = this.state, { disableCountryCode: n } = this.props, i = R(r, { iso2: e }) || {};
-    this.setState({
-      defaultCountry: e,
-      selectedCountry: i,
-      formattedNumber: n ? "" : `+${i.dialCode}`
-    });
-  };
-  // View methods
-  scrollTo = (e) => {
-    if (!e)
-      return;
-    const r = e.parentElement;
-    !r || !document.body || (r.scrollTop = e.offsetTop);
-  };
-  formatNumber = (e, r) => {
-    const { disableCountryCode: n, enableLongNumbers: i, autoFormat: t } = this.props;
-    let o = "";
-    if (n && r ? o = r.split(" ").slice(1).join(" ") : o = r, !e || e.length === 0)
-      return n ? "" : "+";
-    if (e && e.length < 2 || !o || !t)
-      return n ? e : `+${e}`;
-    const s = ie(
-      o,
-      (d, m) => d.remainingText.length === 0 ? d : m !== "." ? {
-        formattedText: d.formattedText + m,
-        remainingText: d.remainingText
-      } : {
-        formattedText: d.formattedText + ke(d.remainingText),
-        remainingText: Te(d.remainingText)
-      },
-      {
-        formattedText: "",
-        remainingText: e.split("")
+  }, [u, g, o, s.selectedCountry.iso2]), le(() => {
+    if (L !== s.formattedNumber) {
+      const a = L || "";
+      let r, n = a;
+      if (a.startsWith("+")) {
+        const l = a.replace(/\D/g, "");
+        r = me(
+          l.substring(0, 6),
+          g,
+          u
+        ), n = N(l, r.format);
+      } else {
+        r = X(g, { iso2: u });
+        const l = r && !Z(a.replace(/\D/g, ""), r.dialCode) ? r.dialCode : "";
+        n = N(
+          (o ? "" : l) + a.replace(/\D/g, ""),
+          r ? r.format : void 0
+        );
       }
-    );
-    let u = "";
-    return i ? u = s.formattedText + s.remainingText.join("") : u = s.formattedText, u.includes("(") && !u.includes(")") && (u += ")"), u;
-  };
-  // Put the cursor to the end of the input (usually after a focus event)
-  cursorToEnd = () => {
-    const { isModernBrowser: e } = this.props, r = this.inputRef;
-    if (r && (r.focus(), e && e())) {
-      const n = r.value.length;
-      r.setSelectionRange(n, n);
+      r && b((l) => ({
+        ...l,
+        selectedCountry: r,
+        formattedNumber: n
+      }));
     }
-  };
-  getElement = (e) => this.flags[`flag_no_${e}`];
-  // return country data from state
-  getCountryData = () => {
-    const { selectedCountry: e } = this.state;
-    return e ? {
-      name: e.name || "",
-      dialCode: e.dialCode || "",
-      countryCode: e.iso2 || ""
-    } : {};
-  };
-  handleInput = (e) => {
-    let { selectedCountry: r, freezeSelection: n } = this.state;
-    const {
-      selectedCountry: i,
-      formattedNumber: t,
-      onlyCountries: o,
-      defaultCountry: s
-    } = this.state, {
-      disableCountryCode: u,
-      countryCodeEditable: d,
-      isModernBrowser: m,
-      onChange: p
-    } = this.props;
-    let v = u ? "" : "+";
-    if (!d) {
-      const g = `+${r.dialCode}`;
-      if (e.target.value.length < g.length)
+  }, [L, u, g, o, N, s.formattedNumber]);
+  const F = (a) => a ? {
+    name: a.name || "",
+    dialCode: a.dialCode || "",
+    countryCode: a.iso2 || ""
+  } : {}, I = O(() => {
+    const a = z.current;
+    if (a && (a.focus(), k && k())) {
+      const r = a.value.length;
+      a.setSelectionRange(r, r);
+    }
+  }, [k]), W = O(
+    (a) => {
+      let { selectedCountry: r, freezeSelection: n } = s, l = r, c = o ? "" : "+";
+      if (!E) {
+        const R = `+${l.dialCode}`;
+        if (a.target.value.length < R.length)
+          return;
+      }
+      if (a.target.value.replace(/\D/g, "").length > 15 || a.target.value === s.formattedNumber)
         return;
-    }
-    if (e.target.value.replace(/\D/g, "").length > 15 || e.target.value === t)
-      return;
-    if (e.target.value.length > 0) {
-      const g = e.target.value.replace(/\D/g, "");
-      (!n || i.dialCode.length > g.length) && (r = this.guessSelectedCountry(
-        g.substring(0, 6),
-        o,
-        s
-      ), n = !1), v = this.formatNumber(
-        g,
-        r.format
-      );
-    }
-    let l = e.target.selectionStart || 0;
-    const h = v.length - t.length;
-    this.setState(
-      {
-        formattedNumber: v,
+      if (a.target.value.length > 0) {
+        const R = a.target.value.replace(/\D/g, "");
+        (!n || r.dialCode.length > R.length) && (l = me(
+          R.substring(0, 6),
+          g,
+          u
+        ), n = !1), c = N(R, l.format);
+      }
+      let d = a.target.selectionStart || 0;
+      const v = c.length - s.formattedNumber.length;
+      b((R) => ({
+        ...R,
+        formattedNumber: c,
         freezeSelection: n,
-        selectedCountry: r.dialCode ? r : i
-      },
-      () => {
-        m && m() && (h > 0 && (l -= h), v.charAt(v.length - 1) === ")" ? this.inputRef?.setSelectionRange(
-          v.length - 1,
-          v.length - 1
-        ) : l > 0 && t.length >= v.length && this.inputRef?.setSelectionRange(l, l)), p && p(v, this.getCountryData());
-      }
-    );
-  };
-  handleRefInput = (e) => {
-    const { inputRef: r, InputProps: n } = this.props;
-    this.inputRef = e;
-    let i;
-    r ? i = r : n?.ref && (i = n.ref), i && (typeof i == "function" ? i(e) : i.current = e);
-  };
-  handleInputClick = (e) => {
-    const { onClick: r } = this.props;
-    r && r(e, this.getCountryData());
-  };
-  handleFlagItemClick = (e) => {
-    const { formattedNumber: r, selectedCountry: n, onlyCountries: i } = this.state, { onChange: t } = this.props, o = n, s = Re(e) ? R(i, (p) => p.iso2 === e) : R(i, e);
-    if (!s) return;
-    const u = r.replace(" ", "").replace("(", "").replace(")", "").replace("-", ""), d = u.length > 1 ? u.replace(
-      o.dialCode,
-      s.dialCode
-    ) : s.dialCode, m = this.formatNumber(
-      d.replace(/\D/g, ""),
-      s.format
-    );
-    this.setState(
-      {
+        selectedCountry: l.dialCode ? l : r
+      })), k && k() && requestAnimationFrame(() => {
+        const R = z.current;
+        if (!R) return;
+        v > 0 && (d -= v), c.charAt(c.length - 1) === ")" ? R.setSelectionRange(
+          c.length - 1,
+          c.length - 1
+        ) : d > 0 && s.formattedNumber.length >= c.length && R.setSelectionRange(d, d);
+      }), x && x(c, F(l));
+    },
+    [
+      s,
+      E,
+      o,
+      g,
+      u,
+      N,
+      k,
+      x
+    ]
+  ), t = O(
+    (a) => {
+      const r = s.selectedCountry, n = Pe(a) ? X(g, (v) => v.iso2 === a) : X(g, a);
+      if (!n) return;
+      const l = s.formattedNumber.replace(" ", "").replace("(", "").replace(")", "").replace("-", ""), c = l.length > 1 ? l.replace(
+        r.dialCode,
+        n.dialCode
+      ) : n.dialCode, d = N(
+        c.replace(/\D/g, ""),
+        n.format
+      );
+      b((v) => ({
+        ...v,
         anchorEl: null,
-        selectedCountry: s,
+        selectedCountry: n,
         freezeSelection: !0,
-        formattedNumber: m
-      },
-      () => {
-        this.cursorToEnd(), t && t(m, this.getCountryData());
+        formattedNumber: d
+      })), setTimeout(() => I(), 0), x && x(d, F(n));
+    },
+    [
+      s.selectedCountry,
+      s.formattedNumber,
+      g,
+      N,
+      x,
+      I
+    ]
+  ), _ = O(
+    (a) => {
+      if (z.current && z.current.value === "+" && s.selectedCountry && !o) {
+        const r = `+${s.selectedCountry.dialCode}`;
+        b((n) => ({ ...n, formattedNumber: r })), setTimeout(() => I(), 10);
       }
-    );
-  };
-  handleInputFocus = (e) => {
-    const { selectedCountry: r } = this.state, { disableCountryCode: n, onFocus: i } = this.props;
-    this.inputRef && this.inputRef.value === "+" && r && !n && this.setState(
-      {
-        formattedNumber: `+${r.dialCode}`
-      },
-      () => setTimeout(this.cursorToEnd, 10)
-    ), this.setState({ placeholder: "" }), i && i(e, this.getCountryData()), setTimeout(this.cursorToEnd, 10);
-  };
-  handleInputBlur = (e) => {
-    const { placeholder: r, onBlur: n } = this.props;
-    e.target.value || this.setState({ placeholder: r || "" }), n && n(e, this.getCountryData());
-  };
-  getHighlightCountryIndex = (e) => {
-    const {
-      highlightCountryIndex: r,
-      onlyCountries: n,
-      preferredCountries: i
-    } = this.state, t = r + e;
-    return t < 0 || t >= n.length + i.length ? t - e : t;
-  };
-  searchCountry = () => {
-    const { queryString: e, onlyCountries: r, preferredCountries: n } = this.state, i = this.getProbableCandidate(e) || r[0], t = oe(r, i) + n.length;
-    this.scrollTo(this.getElement(t)), this.setState({
+      b((r) => ({ ...r, placeholder: "" })), U && U(a, F(s.selectedCountry)), setTimeout(() => I(), 10);
+    },
+    [
+      s.selectedCountry,
+      o,
+      U,
+      I
+    ]
+  ), j = O(
+    (a) => {
+      a.target.value || b((r) => ({ ...r, placeholder: q || "" })), G && G(a, F(s.selectedCountry));
+    },
+    [q, G, s.selectedCountry]
+  ), ne = O(
+    (a) => {
+      D && D(a, F(s.selectedCountry));
+    },
+    [D, s.selectedCountry]
+  ), K = O((a) => {
+    !a || !a.parentElement || (a.parentElement.scrollTop = a.offsetTop);
+  }, []), e = O(() => {
+    const r = ((c) => !c || c.length === 0 ? null : ce(
+      g,
+      (d) => Z(d.name.toLowerCase(), c.toLowerCase())
+    )[0])(s.queryString) || g[0], n = je(g, r) + P.length, l = M.current[`flag_no_${n}`];
+    K(l), b((c) => ({
+      ...c,
       queryString: "",
-      highlightCountryIndex: t
-    });
-  };
-  handleKeydown = (e) => {
-    const {
-      anchorEl: r,
-      highlightCountryIndex: n,
-      preferredCountries: i,
-      onlyCountries: t,
-      queryString: o,
-      debouncedQueryStingSearcher: s
-    } = this.state, { keys: u, disabled: d } = this.props;
-    if (!r || d || !u) return;
-    e.preventDefault ? e.preventDefault() : e.returnValue = !1;
-    const m = (p) => {
-      this.setState(
-        {
-          highlightCountryIndex: this.getHighlightCountryIndex(p)
-        },
-        () => {
-          this.scrollTo(
-            this.getElement(n + i.length)
-          );
+      highlightCountryIndex: n
+    }));
+  }, [s.queryString, g, P, K]), i = se(
+    () => Oe(e, 100),
+    [e]
+  ), f = O(
+    (a) => {
+      if (!s.anchorEl || m.disabled || !S) return;
+      a.preventDefault && a.preventDefault();
+      const r = (n) => {
+        const l = g.length + P.length;
+        let c = s.highlightCountryIndex + n;
+        (c < 0 || c >= l) && (c -= n), b((v) => ({ ...v, highlightCountryIndex: c }));
+        const d = M.current[`flag_no_${c}`];
+        K(d);
+      };
+      switch (a.which) {
+        case S.DOWN:
+          r(1);
+          break;
+        case S.UP:
+          r(-1);
+          break;
+        case S.ENTER: {
+          const l = [
+            ...P,
+            ...g
+          ][s.highlightCountryIndex];
+          l && t(l);
+          break;
         }
-      );
-    };
-    switch (e.which) {
-      case u.DOWN:
-        m(1);
-        break;
-      case u.UP:
-        m(-1);
-        break;
-      case u.ENTER:
-        this.handleFlagItemClick(t[n]);
-        break;
-      case u.ESC:
-        this.setState(
-          {
-            anchorEl: null
-          },
-          this.cursorToEnd
-        );
-        break;
-      default:
-        (e.which >= u.A && e.which <= u.Z || e.which === u.SPACE) && this.setState(
-          {
-            queryString: o + String.fromCharCode(e.which)
-          },
-          s
-        );
-    }
-  };
-  handleInputKeyDown = (e) => {
-    const { keys: r, onEnterKeyPress: n, onKeyDown: i } = this.props;
-    r && e.which === r.ENTER && n && n(e), i && i(e);
-  };
-  checkIfValid = () => {
-    const { formattedNumber: e } = this.state, { isValid: r } = this.props;
-    return r ? r(e.replace(/\D/g, "")) : !0;
-  };
-  updateFormattedNumber = (e) => {
-    const { onlyCountries: r, defaultCountry: n } = this.state, { disableCountryCode: i } = this.props;
-    let t, o = e, s = e;
-    if (o.startsWith("+"))
-      o = o.replace(/\D/g, ""), t = this.guessSelectedCountry(
-        o.substring(0, 6),
-        r,
-        n
-      ), s = this.formatNumber(o, t.format);
-    else {
-      t = R(r, { iso2: n });
-      const u = t && !k(o.replace(/\D/g, ""), t.dialCode) ? t.dialCode : "";
-      s = this.formatNumber(
-        (i ? "" : u) + o.replace(/\D/g, ""),
-        t ? t.format : void 0
-      );
-    }
-    t && this.setState({ selectedCountry: t, formattedNumber: s });
-  };
-  getDropdownProps = () => {
-    const { selectedCountry: e, anchorEl: r, preferredCountries: n, onlyCountries: i } = this.state, t = {
-      flagButton: {
-        minWidth: 30,
-        padding: 0,
-        height: 30
-      },
-      native: {
-        width: 30,
-        height: 30,
-        padding: 8
-      },
-      nativeRoot: {
-        padding: 0,
-        "& + svg": {
-          display: "none"
-        }
-      },
-      nativeSelect: {
-        padding: 0,
-        lineHeight: 0,
-        height: 11
-      },
-      positionStart: {
-        position: "relative"
-      },
-      flagIcon: {
-        width: 30,
-        height: 24,
-        paddingRight: 8
+        case S.ESC:
+          b((n) => ({ ...n, anchorEl: null })), I();
+          break;
+        default:
+          (a.which >= S.A && a.which <= S.Z || a.which === S.SPACE) && (b((n) => ({
+            ...n,
+            queryString: n.queryString + String.fromCharCode(a.which)
+          })), i());
       }
-    }, { dropdownClass: o, localization: s, disableDropdown: u, native: d } = this.props;
-    i.sort((l, h) => {
-      const g = s?.[l.name] || l.name, E = s?.[h.name] || h.name;
-      return g.localeCompare(E);
-    });
-    const m = (l) => !!(e && e.dialCode === l.dialCode), p = de[e.iso2.toUpperCase()];
-    return u ? {} : {
-      startAdornment: /* @__PURE__ */ y.jsx(ge, { style: t.positionStart, position: "start", children: d ? /* @__PURE__ */ y.jsxs(
-        be,
+    },
+    [
+      s.anchorEl,
+      s.highlightCountryIndex,
+      m.disabled,
+      S,
+      g,
+      P,
+      t,
+      I,
+      i,
+      K
+    ]
+  );
+  le(() => (document.addEventListener("keydown", f), () => document.removeEventListener("keydown", f)), [f]);
+  const y = O(
+    (a) => {
+      z.current = a, m.inputRef && (typeof m.inputRef == "function" ? m.inputRef(a) : m.inputRef.current = a);
+    },
+    [m.inputRef]
+  ), J = O(
+    (a) => {
+      S && a.which === S.ENTER && $ && $(a), A && A(a);
+    },
+    [S, $, A]
+  );
+  return {
+    state: s,
+    setState: b,
+    flagsRef: M,
+    inputRef: z,
+    handleInput: W,
+    handleInputClick: ne,
+    handleInputFocus: _,
+    handleInputBlur: j,
+    handleKeydown: f,
+    handleInputKeyDown: J,
+    handleRefInput: y,
+    handleFlagItemClick: t,
+    computedOnlyCountries: g,
+    computedPreferredCountries: P,
+    isValid: () => V(s.formattedNumber.replace(/\D/g, ""))
+  };
+}, ea = (m) => {
+  const {
+    classes: C,
+    dropdownClass: E,
+    disableDropdown: u,
+    native: p,
+    localization: o,
+    inputClass: h,
+    error: w,
+    InputProps: k,
+    variant: S = "standard",
+    ...B
+  } = m, {
+    state: x,
+    setState: $,
+    flagsRef: A,
+    handleInput: G,
+    handleInputClick: U,
+    handleInputFocus: D,
+    handleInputBlur: q,
+    handleKeydown: H,
+    handleRefInput: Y,
+    handleFlagItemClick: V,
+    computedOnlyCountries: L,
+    computedPreferredCountries: M,
+    isValid: z
+  } = qe(m), {
+    formattedNumber: g,
+    placeholder: P,
+    selectedCountry: N,
+    anchorEl: s
+  } = x, b = {
+    flagButton: {
+      minWidth: 30,
+      padding: 0,
+      height: 30
+    },
+    native: {
+      width: 30,
+      height: 30,
+      padding: 8
+    },
+    nativeRoot: {
+      padding: 0,
+      "& + svg": {
+        display: "none"
+      }
+    },
+    nativeSelect: {
+      padding: 0,
+      lineHeight: 0,
+      height: 11
+    },
+    positionStart: {
+      position: "relative"
+    },
+    flagIcon: {
+      width: 30,
+      height: 24,
+      paddingRight: 8
+    }
+  }, F = (t) => !!(N && N.dialCode === t.dialCode), I = ye[N.iso2.toUpperCase()], W = u ? {} : {
+    startAdornment: /* @__PURE__ */ T.jsx(_e, { style: b.positionStart, position: "start", children: p ? /* @__PURE__ */ T.jsxs(
+      xe,
+      {
+        id: "country-menu",
+        style: b.native,
+        sx: {
+          root: b.nativeRoot,
+          select: b.nativeSelect
+        },
+        onChange: (t) => V(t.target.value),
+        IconComponent: !!I && I,
+        disableUnderline: !0,
+        children: [
+          !!M.length && te(
+            M,
+            (t, _) => /* @__PURE__ */ T.jsx(
+              oe,
+              {
+                itemRef: (j) => {
+                  A.current[`flag_no_${_}`] = j;
+                },
+                name: t.name,
+                iso2: t.iso2,
+                dialCode: t.dialCode,
+                localization: o?.[t.name],
+                native: !0
+              },
+              `preferred_${t.iso2}_${_}`
+            )
+          ),
+          te(
+            L,
+            (t, _) => /* @__PURE__ */ T.jsx(
+              oe,
+              {
+                itemRef: (j) => {
+                  A.current[`flag_no_${_}`] = j;
+                },
+                name: t.name,
+                iso2: t.iso2,
+                dialCode: t.dialCode,
+                localization: o?.[t.name],
+                native: !0
+              },
+              `preferred_${t.iso2}_${_}`
+            )
+          )
+        ]
+      }
+    ) : /* @__PURE__ */ T.jsxs(T.Fragment, { children: [
+      /* @__PURE__ */ T.jsx(
+        ke,
         {
+          style: b.flagButton,
+          "aria-owns": s ? "country-menu" : void 0,
+          "aria-label": "Select country",
+          onClick: (t) => $((_) => ({ ..._, anchorEl: t.currentTarget })),
+          "aria-haspopup": !0,
+          children: !!I && /* @__PURE__ */ T.jsx(I, { className: "margin" })
+        }
+      ),
+      /* @__PURE__ */ T.jsxs(
+        we,
+        {
+          className: E,
           id: "country-menu",
-          style: t.native,
-          sx: {
-            root: t.nativeRoot,
-            // clsx(classes.nativeRoot, 'native'),
-            select: t.nativeSelect
-          },
-          onChange: (l) => this.handleFlagItemClick(l.target.value),
-          IconComponent: !!p && p,
-          disableUnderline: !0,
+          anchorEl: s,
+          open: !!s,
+          onClose: () => $((t) => ({ ...t, anchorEl: null })),
           children: [
-            !!n.length && A(n, (l, h) => /* @__PURE__ */ y.jsx(
-              D,
-              {
-                itemRef: (g) => {
-                  this.flags[`flag_no_${h}`] = g;
+            !!M.length && te(
+              M,
+              (t, _) => /* @__PURE__ */ T.jsx(
+                oe,
+                {
+                  itemRef: (j) => {
+                    A.current[`flag_no_${_}`] = j;
+                  },
+                  selected: F(t),
+                  onClick: () => V(t),
+                  name: t.name,
+                  iso2: t.iso2,
+                  dialCode: t.dialCode,
+                  localization: o?.[t.name],
+                  style: b.flagIcon
                 },
-                name: l.name,
-                iso2: l.iso2,
-                dialCode: l.dialCode,
-                localization: s?.[l.name],
-                native: !0
-              },
-              `preferred_${l.iso2}_${h}`
-            )),
-            A(i, (l, h) => /* @__PURE__ */ y.jsx(
-              D,
-              {
-                itemRef: (g) => {
-                  this.flags[`flag_no_${h}`] = g;
+                `preferred_${t.iso2}_${_}`
+              )
+            ),
+            !!M.length && /* @__PURE__ */ T.jsx(Te, {}),
+            te(
+              L,
+              (t, _) => /* @__PURE__ */ T.jsx(
+                oe,
+                {
+                  itemRef: (j) => {
+                    A.current[`flag_no_${_}`] = j;
+                  },
+                  selected: F(t),
+                  onClick: () => V(t),
+                  name: t.name,
+                  iso2: t.iso2,
+                  dialCode: t.dialCode,
+                  localization: o?.[t.name],
+                  style: b.flagIcon
                 },
-                name: l.name,
-                iso2: l.iso2,
-                dialCode: l.dialCode,
-                localization: s?.[l.name],
-                native: !0
-              },
-              `preferred_${l.iso2}_${h}`
-            ))
+                `preferred_${t.iso2}_${_}`
+              )
+            )
           ]
         }
-      ) : /* @__PURE__ */ y.jsxs(y.Fragment, { children: [
-        /* @__PURE__ */ y.jsx(
-          pe,
-          {
-            style: t.flagButton,
-            "aria-owns": r ? "country-menu" : void 0,
-            "aria-label": "Select country",
-            onClick: (l) => this.setState({ anchorEl: l.currentTarget }),
-            "aria-haspopup": !0,
-            children: !!p && /* @__PURE__ */ y.jsx(p, { className: "margin" })
-          }
-        ),
-        /* @__PURE__ */ y.jsxs(
-          Ce,
-          {
-            className: o,
-            id: "country-menu",
-            anchorEl: r,
-            open: !!r,
-            onClose: () => this.setState({ anchorEl: null }),
-            children: [
-              !!n.length && A(n, (l, h) => /* @__PURE__ */ y.jsx(
-                D,
-                {
-                  itemRef: (g) => {
-                    this.flags[`flag_no_${h}`] = g;
-                  },
-                  selected: m(l),
-                  onClick: () => this.handleFlagItemClick(l),
-                  name: l.name,
-                  iso2: l.iso2,
-                  dialCode: l.dialCode,
-                  localization: s?.[l.name],
-                  style: t.flagIcon
-                },
-                `preferred_${l.iso2}_${h}`
-              )),
-              !!n.length && /* @__PURE__ */ y.jsx(he, {}),
-              A(i, (l, h) => /* @__PURE__ */ y.jsx(
-                D,
-                {
-                  itemRef: (g) => {
-                    this.flags[`flag_no_${h}`] = g;
-                  },
-                  selected: m(l),
-                  onClick: () => this.handleFlagItemClick(l),
-                  name: l.name,
-                  iso2: l.iso2,
-                  dialCode: l.dialCode,
-                  localization: s?.[l.name],
-                  style: t.flagIcon
-                },
-                `preferred_${l.iso2}_${h}`
-              ))
-            ]
-          }
-        )
-      ] }) })
-    };
+      )
+    ] }) })
   };
-  render() {
-    const { formattedNumber: e, placeholder: r } = this.state, {
-      // start placeholder props
-      native: n,
-      defaultCountry: i,
-      excludeCountries: t,
-      onlyCountries: o,
-      preferredCountries: s,
-      dropdownClass: u,
-      autoFormat: d,
-      disableAreaCodes: m,
-      isValid: p,
-      disableCountryCode: v,
-      disableDropdown: l,
-      enableLongNumbers: h,
-      countryCodeEditable: g,
-      onEnterKeyPress: E,
-      isModernBrowser: V,
-      classes: Y,
-      keys: q,
-      localization: K,
-      placeholder: W,
-      regions: H,
-      onChange: J,
-      value: Z,
-      // end placeholder props
-      inputClass: w,
-      error: O,
-      InputProps: z,
-      ...x
-    } = this.props, I = this.getDropdownProps();
-    return /* @__PURE__ */ y.jsx(
-      ye,
-      {
-        placeholder: r,
-        value: e,
-        className: w,
-        inputRef: this.handleRefInput,
-        error: O || !this.checkIfValid(),
-        onChange: this.handleInput,
-        onClick: this.handleInputClick,
-        onFocus: this.handleInputFocus,
-        onBlur: this.handleInputBlur,
-        onKeyDown: this.handleInputKeyDown,
-        type: "tel",
-        InputProps: {
-          ...I,
-          ...z
-        },
-        ...x
-      }
-    );
-  }
-}
+  return /* @__PURE__ */ T.jsx(
+    Ne,
+    {
+      variant: S,
+      placeholder: P,
+      value: g,
+      className: h,
+      inputRef: Y,
+      error: w || !z(),
+      onChange: G,
+      onClick: U,
+      onFocus: D,
+      onBlur: q,
+      onKeyDown: H,
+      type: "tel",
+      InputProps: {
+        ...W,
+        ...k
+      },
+      ...B
+    }
+  );
+};
 export {
-  Le as default
+  ea as default
 };
