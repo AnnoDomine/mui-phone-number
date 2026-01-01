@@ -25,6 +25,7 @@ class ChangeDemo extends React.Component<DemoProps, DemoState> {
         Current number: {number}
         <br />
         <MaterialUiPhoneNumber
+          value={number}
           defaultCountry="it"
           preferredCountries={['it', 'se']}
           onChange={(e) => {

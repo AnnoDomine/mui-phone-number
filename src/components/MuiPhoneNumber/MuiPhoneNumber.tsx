@@ -239,6 +239,12 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
         ...dropdownProps,
         ...externalInputProps,
       }}
+      slotProps={{
+        input: {
+          ...dropdownProps,
+          ...externalInputProps,
+        },
+      }}
       {...restProps}
     />
   );

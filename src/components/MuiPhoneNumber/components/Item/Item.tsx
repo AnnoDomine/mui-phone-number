@@ -47,9 +47,7 @@ const Item: React.FC<ItemProps> = ({
           <FlagComponent />
         </div>
       )}
-
-      <span className="country-name">{localization || name}</span>
-      {' '}
+      <span className="country-name">{localization || name}</span>{' '}
       <span className="dial-code">{`+${dialCode}`}</span>
     </MenuItem>
   );

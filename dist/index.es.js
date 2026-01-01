@@ -1,169 +1,169 @@
-import Ne, { useRef as Te, useMemo as ce, useCallback as y, useState as ue, useEffect as Fe } from "react";
-import Me from "@mui/material/Divider";
-import Be from "@mui/material/IconButton";
-import ze from "@mui/material/InputAdornment";
-import De from "@mui/material/Menu";
-import $e from "@mui/material/NativeSelect";
-import Le from "@mui/material/TextField";
-import * as Pe from "country-flag-icons/react/3x2";
-import ge from "lodash/map";
-import Ge from "@mui/material/MenuItem";
-import Ue from "lodash/debounce";
-import Ee from "lodash/filter";
-import ve from "lodash/find";
-import Ve from "lodash/findIndex";
-import Ye from "lodash/head";
-import qe from "lodash/includes";
-import Ke from "lodash/isString";
-import Ae from "lodash/reduce";
-import Se from "lodash/some";
-import fe from "lodash/startsWith";
-import We from "lodash/tail";
-import He from "lodash/trim";
-var be = { exports: {} }, de = {};
-var ye;
-function Je() {
-  if (ye) return de;
-  ye = 1;
-  var l = /* @__PURE__ */ Symbol.for("react.transitional.element"), h = /* @__PURE__ */ Symbol.for("react.fragment");
-  function C(d, f, c) {
+import je, { useRef as ye, useState as oe, useEffect as we, useMemo as se, useCallback as x, useDebugValue as De } from "react";
+import $e from "@mui/material/Divider";
+import Le from "@mui/material/IconButton";
+import Ge from "@mui/material/InputAdornment";
+import Ve from "@mui/material/Menu";
+import Ue from "@mui/material/NativeSelect";
+import Ye from "@mui/material/TextField";
+import * as Oe from "country-flag-icons/react/3x2";
+import ve from "lodash/map";
+import qe from "@mui/material/MenuItem";
+import Ke from "lodash/debounce";
+import _e from "lodash/filter";
+import fe from "lodash/find";
+import We from "lodash/findIndex";
+import He from "lodash/head";
+import Je from "lodash/includes";
+import Ze from "lodash/isString";
+import Fe from "lodash/reduce";
+import Xe from "lodash/some";
+import pe from "lodash/startsWith";
+import Qe from "lodash/tail";
+import ea from "lodash/trim";
+var Ee = { exports: {} }, de = {};
+var xe;
+function aa() {
+  if (xe) return de;
+  xe = 1;
+  var s = /* @__PURE__ */ Symbol.for("react.transitional.element"), g = /* @__PURE__ */ Symbol.for("react.fragment");
+  function h(m, f, l) {
     var p = null;
-    if (c !== void 0 && (p = "" + c), f.key !== void 0 && (p = "" + f.key), "key" in f) {
-      c = {};
-      for (var R in f)
-        R !== "key" && (c[R] = f[R]);
-    } else c = f;
-    return f = c.ref, {
-      $$typeof: l,
-      type: d,
+    if (l !== void 0 && (p = "" + l), f.key !== void 0 && (p = "" + f.key), "key" in f) {
+      l = {};
+      for (var S in f)
+        S !== "key" && (l[S] = f[S]);
+    } else l = f;
+    return f = l.ref, {
+      $$typeof: s,
+      type: m,
       key: p,
       ref: f !== void 0 ? f : null,
-      props: c
+      props: l
     };
   }
-  return de.Fragment = h, de.jsx = C, de.jsxs = C, de;
+  return de.Fragment = g, de.jsx = h, de.jsxs = h, de;
 }
 var me = {};
-var _e;
-function Ze() {
-  return _e || (_e = 1, process.env.NODE_ENV !== "production" && (function() {
-    function l(e) {
+var Ie;
+function ra() {
+  return Ie || (Ie = 1, process.env.NODE_ENV !== "production" && (function() {
+    function s(e) {
       if (e == null) return null;
       if (typeof e == "function")
-        return e.$$typeof === te ? null : e.displayName || e.name || null;
+        return e.$$typeof === b ? null : e.displayName || e.name || null;
       if (typeof e == "string") return e;
       switch (e) {
-        case G:
+        case H:
           return "Fragment";
-        case se:
+        case ee:
           return "Profiler";
-        case ne:
+        case te:
           return "StrictMode";
-        case Z:
+        case G:
           return "Suspense";
         case V:
           return "SuspenseList";
-        case B:
+        case re:
           return "Activity";
       }
       if (typeof e == "object")
         switch (typeof e.tag == "number" && console.error(
           "Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."
         ), e.$$typeof) {
-          case A:
+          case M:
             return "Portal";
           case ie:
             return e.displayName || "Context";
-          case J:
+          case ae:
             return (e._context.displayName || "Context") + ".Consumer";
-          case U:
-            var r = e.render;
-            return e = e.displayName, e || (e = r.displayName || r.name || "", e = e !== "" ? "ForwardRef(" + e + ")" : "ForwardRef"), e;
-          case g:
-            return r = e.displayName || null, r !== null ? r : l(e.type) || "Memo";
-          case I:
-            r = e._payload, e = e._init;
+          case O:
+            var n = e.render;
+            return e = e.displayName, e || (e = n.displayName || n.name || "", e = e !== "" ? "ForwardRef(" + e + ")" : "ForwardRef"), e;
+          case le:
+            return n = e.displayName || null, n !== null ? n : s(e.type) || "Memo";
+          case J:
+            n = e._payload, e = e._init;
             try {
-              return l(e(r));
+              return s(e(n));
             } catch {
             }
         }
       return null;
     }
-    function h(e) {
+    function g(e) {
       return "" + e;
     }
-    function C(e) {
+    function h(e) {
       try {
-        h(e);
-        var r = !1;
+        g(e);
+        var n = !1;
       } catch {
-        r = !0;
+        n = !0;
       }
-      if (r) {
-        r = console;
-        var t = r.error, u = typeof Symbol == "function" && Symbol.toStringTag && e[Symbol.toStringTag] || e.constructor.name || "Object";
-        return t.call(
-          r,
+      if (n) {
+        n = console;
+        var u = n.error, r = typeof Symbol == "function" && Symbol.toStringTag && e[Symbol.toStringTag] || e.constructor.name || "Object";
+        return u.call(
+          n,
           "The provided key is an unsupported type %s. This value must be coerced to a string before using it here.",
-          u
-        ), h(e);
+          r
+        ), g(e);
       }
     }
-    function d(e) {
-      if (e === G) return "<>";
-      if (typeof e == "object" && e !== null && e.$$typeof === I)
+    function m(e) {
+      if (e === H) return "<>";
+      if (typeof e == "object" && e !== null && e.$$typeof === J)
         return "<...>";
       try {
-        var r = l(e);
-        return r ? "<" + r + ">" : "<...>";
+        var n = s(e);
+        return n ? "<" + n + ">" : "<...>";
       } catch {
         return "<...>";
       }
     }
     function f() {
-      var e = Y.A;
+      var e = A.A;
       return e === null ? null : e.getOwner();
     }
-    function c() {
+    function l() {
       return Error("react-stack-top-frame");
     }
     function p(e) {
-      if (j.call(e, "key")) {
-        var r = Object.getOwnPropertyDescriptor(e, "key").get;
-        if (r && r.isReactWarning) return !1;
+      if (F.call(e, "key")) {
+        var n = Object.getOwnPropertyDescriptor(e, "key").get;
+        if (n && n.isReactWarning) return !1;
       }
       return e.key !== void 0;
     }
-    function R(e, r) {
-      function t() {
-        O || (O = !0, console.error(
+    function S(e, n) {
+      function u() {
+        N || (N = !0, console.error(
           "%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)",
-          r
+          n
         ));
       }
-      t.isReactWarning = !0, Object.defineProperty(e, "key", {
-        get: t,
+      u.isReactWarning = !0, Object.defineProperty(e, "key", {
+        get: u,
         configurable: !0
       });
     }
-    function T() {
-      var e = l(this.type);
-      return F[e] || (F[e] = !0, console.error(
+    function y() {
+      var e = s(this.type);
+      return B[e] || (B[e] = !0, console.error(
         "Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."
       )), e = this.props.ref, e !== void 0 ? e : null;
     }
-    function v(e, r, t, u, K, P) {
-      var m = t.ref;
+    function E(e, n, u, r, R, T) {
+      var c = u.ref;
       return e = {
-        $$typeof: H,
+        $$typeof: Q,
         type: e,
-        key: r,
-        props: t,
-        _owner: u
-      }, (m !== void 0 ? m : null) !== null ? Object.defineProperty(e, "ref", {
+        key: n,
+        props: u,
+        _owner: r
+      }, (c !== void 0 ? c : null) !== null ? Object.defineProperty(e, "ref", {
         enumerable: !1,
-        get: T
+        get: y
       }) : Object.defineProperty(e, "ref", { enumerable: !1, value: null }), e._store = {}, Object.defineProperty(e._store, "validated", {
         configurable: !1,
         enumerable: !1,
@@ -178,158 +178,159 @@ function Ze() {
         configurable: !1,
         enumerable: !1,
         writable: !0,
-        value: K
+        value: R
       }), Object.defineProperty(e, "_debugTask", {
         configurable: !1,
         enumerable: !1,
         writable: !0,
-        value: P
+        value: T
       }), Object.freeze && (Object.freeze(e.props), Object.freeze(e)), e;
     }
-    function L(e, r, t, u, K, P) {
-      var m = r.children;
-      if (m !== void 0)
-        if (u)
-          if (X(m)) {
-            for (u = 0; u < m.length; u++)
-              _(m[u]);
-            Object.freeze && Object.freeze(m);
+    function W(e, n, u, r, R, T) {
+      var c = n.children;
+      if (c !== void 0)
+        if (r)
+          if (Z(c)) {
+            for (r = 0; r < c.length; r++)
+              I(c[r]);
+            Object.freeze && Object.freeze(c);
           } else
             console.error(
               "React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead."
             );
-        else _(m);
-      if (j.call(r, "key")) {
-        m = l(e);
-        var w = Object.keys(r).filter(function(D) {
-          return D !== "key";
+        else I(c);
+      if (F.call(n, "key")) {
+        c = s(e);
+        var w = Object.keys(n).filter(function(K) {
+          return K !== "key";
         });
-        u = 0 < w.length ? "{key: someKey, " + w.join(": ..., ") + ": ...}" : "{key: someKey}", q[m + u] || (w = 0 < w.length ? "{" + w.join(": ..., ") + ": ...}" : "{}", console.error(
+        r = 0 < w.length ? "{key: someKey, " + w.join(": ..., ") + ": ...}" : "{key: someKey}", z[c + r] || (w = 0 < w.length ? "{" + w.join(": ..., ") + ": ...}" : "{}", console.error(
           `A props object containing a "key" prop is being spread into JSX:
   let props = %s;
   <%s {...props} />
 React keys must be passed directly to JSX without using spread:
   let props = %s;
   <%s key={someKey} {...props} />`,
-          u,
-          m,
+          r,
+          c,
           w,
-          m
-        ), q[m + u] = !0);
+          c
+        ), z[c + r] = !0);
       }
-      if (m = null, t !== void 0 && (C(t), m = "" + t), p(r) && (C(r.key), m = "" + r.key), "key" in r) {
-        t = {};
-        for (var ee in r)
-          ee !== "key" && (t[ee] = r[ee]);
-      } else t = r;
-      return m && R(
-        t,
+      if (c = null, u !== void 0 && (h(u), c = "" + u), p(n) && (h(n.key), c = "" + n.key), "key" in n) {
+        u = {};
+        for (var q in n)
+          q !== "key" && (u[q] = n[q]);
+      } else u = n;
+      return c && S(
+        u,
         typeof e == "function" ? e.displayName || e.name || "Unknown" : e
-      ), v(
+      ), E(
         e,
-        m,
-        t,
+        c,
+        u,
         f(),
-        K,
-        P
+        R,
+        T
       );
     }
-    function _(e) {
-      W(e) ? e._store && (e._store.validated = 1) : typeof e == "object" && e !== null && e.$$typeof === I && (e._payload.status === "fulfilled" ? W(e._payload.value) && e._payload.value._store && (e._payload.value._store.validated = 1) : e._store && (e._store.validated = 1));
+    function I(e) {
+      X(e) ? e._store && (e._store.validated = 1) : typeof e == "object" && e !== null && e.$$typeof === J && (e._payload.status === "fulfilled" ? X(e._payload.value) && e._payload.value._store && (e._payload.value._store.validated = 1) : e._store && (e._store.validated = 1));
     }
-    function W(e) {
-      return typeof e == "object" && e !== null && e.$$typeof === H;
+    function X(e) {
+      return typeof e == "object" && e !== null && e.$$typeof === Q;
     }
-    var M = Ne, H = /* @__PURE__ */ Symbol.for("react.transitional.element"), A = /* @__PURE__ */ Symbol.for("react.portal"), G = /* @__PURE__ */ Symbol.for("react.fragment"), ne = /* @__PURE__ */ Symbol.for("react.strict_mode"), se = /* @__PURE__ */ Symbol.for("react.profiler"), J = /* @__PURE__ */ Symbol.for("react.consumer"), ie = /* @__PURE__ */ Symbol.for("react.context"), U = /* @__PURE__ */ Symbol.for("react.forward_ref"), Z = /* @__PURE__ */ Symbol.for("react.suspense"), V = /* @__PURE__ */ Symbol.for("react.suspense_list"), g = /* @__PURE__ */ Symbol.for("react.memo"), I = /* @__PURE__ */ Symbol.for("react.lazy"), B = /* @__PURE__ */ Symbol.for("react.activity"), te = /* @__PURE__ */ Symbol.for("react.client.reference"), Y = M.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, j = Object.prototype.hasOwnProperty, X = Array.isArray, z = console.createTask ? console.createTask : function() {
+    var L = je, Q = /* @__PURE__ */ Symbol.for("react.transitional.element"), M = /* @__PURE__ */ Symbol.for("react.portal"), H = /* @__PURE__ */ Symbol.for("react.fragment"), te = /* @__PURE__ */ Symbol.for("react.strict_mode"), ee = /* @__PURE__ */ Symbol.for("react.profiler"), ae = /* @__PURE__ */ Symbol.for("react.consumer"), ie = /* @__PURE__ */ Symbol.for("react.context"), O = /* @__PURE__ */ Symbol.for("react.forward_ref"), G = /* @__PURE__ */ Symbol.for("react.suspense"), V = /* @__PURE__ */ Symbol.for("react.suspense_list"), le = /* @__PURE__ */ Symbol.for("react.memo"), J = /* @__PURE__ */ Symbol.for("react.lazy"), re = /* @__PURE__ */ Symbol.for("react.activity"), b = /* @__PURE__ */ Symbol.for("react.client.reference"), A = L.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, F = Object.prototype.hasOwnProperty, Z = Array.isArray, U = console.createTask ? console.createTask : function() {
       return null;
     };
-    M = {
+    L = {
       react_stack_bottom_frame: function(e) {
         return e();
       }
     };
-    var O, F = {}, N = M.react_stack_bottom_frame.bind(
-      M,
-      c
-    )(), Q = z(d(c)), q = {};
-    me.Fragment = G, me.jsx = function(e, r, t) {
-      var u = 1e4 > Y.recentlyCreatedOwnerStacks++;
-      return L(
+    var N, B = {}, j = L.react_stack_bottom_frame.bind(
+      L,
+      l
+    )(), Y = U(m(l)), z = {};
+    me.Fragment = H, me.jsx = function(e, n, u) {
+      var r = 1e4 > A.recentlyCreatedOwnerStacks++;
+      return W(
         e,
-        r,
-        t,
+        n,
+        u,
         !1,
-        u ? Error("react-stack-top-frame") : N,
-        u ? z(d(e)) : Q
+        r ? Error("react-stack-top-frame") : j,
+        r ? U(m(e)) : Y
       );
-    }, me.jsxs = function(e, r, t) {
-      var u = 1e4 > Y.recentlyCreatedOwnerStacks++;
-      return L(
+    }, me.jsxs = function(e, n, u) {
+      var r = 1e4 > A.recentlyCreatedOwnerStacks++;
+      return W(
         e,
-        r,
-        t,
+        n,
+        u,
         !0,
-        u ? Error("react-stack-top-frame") : N,
-        u ? z(d(e)) : Q
+        r ? Error("react-stack-top-frame") : j,
+        r ? U(m(e)) : Y
       );
     };
   })()), me;
 }
-var we;
-function Xe() {
-  return we || (we = 1, process.env.NODE_ENV === "production" ? be.exports = Je() : be.exports = Ze()), be.exports;
+var Ne;
+function na() {
+  return Ne || (Ne = 1, process.env.NODE_ENV === "production" ? Ee.exports = aa() : Ee.exports = ra()), Ee.exports;
 }
-var k = Xe();
-const Qe = ({
-  name: l,
-  iso2: h,
-  dialCode: C,
-  localization: d,
+var k = na();
+const ta = ({
+  name: s,
+  iso2: g,
+  dialCode: h,
+  localization: m,
   itemRef: f,
-  native: c = !1,
+  native: l = !1,
   ...p
 }) => {
-  if (c)
+  if (l)
     return /* @__PURE__ */ k.jsxs(
       "option",
       {
         className: "country",
-        "data-dial-code": "1",
-        "data-country-code": h,
-        value: h,
+        "data-dial-code": h,
+        "data-country-code": g,
+        value: g,
         ...p,
         onClick: p.onClick,
         children: [
-          d || l,
+          m || s,
           " ",
-          `+${C}`
+          `+${h}`
         ]
       }
     );
-  const R = Pe[h.toUpperCase()];
+  const S = Oe[g.toUpperCase()];
   return /* @__PURE__ */ k.jsxs(
-    Ge,
+    qe,
     {
       ref: f,
       className: "country",
-      "data-dial-code": "1",
-      "data-country-code": h,
+      "data-dial-code": h,
+      "data-country-code": g,
       ...p,
       children: [
-        !!R && /* @__PURE__ */ k.jsx(
+        !!S && /* @__PURE__ */ k.jsx(
           "div",
           {
             className: p.className,
             style: { width: 30, height: 24, paddingRight: 8 },
-            children: /* @__PURE__ */ k.jsx(R, {})
+            children: /* @__PURE__ */ k.jsx(S, {})
           }
         ),
-        /* @__PURE__ */ k.jsx("span", { className: "country-name", children: d || l }),
-        /* @__PURE__ */ k.jsx("span", { className: "dial-code", children: `+${C}` })
+        /* @__PURE__ */ k.jsx("span", { className: "country-name", children: m || s }),
+        " ",
+        /* @__PURE__ */ k.jsx("span", { className: "dial-code", children: `+${h}` })
       ]
     }
   );
-}, Ce = Ne.memo(Qe), ea = [
+}, ke = je.memo(ta), ia = [
   ["Afghanistan", ["asia"], "af", "93"],
   ["Albania", ["europe"], "al", "355"],
   ["Algeria", ["africa", "north-africa"], "dz", "213"],
@@ -926,59 +927,59 @@ const Qe = ({
   ["Yemen", ["middle-east"], "ye", "967"],
   ["Zambia", ["africa"], "zm", "260"],
   ["Zimbabwe", ["africa"], "zw", "263"]
-], ke = {};
-function xe(l, h, C) {
-  h in ke || (ke[h] = []);
-  const d = C || 0;
-  ke[h][d] = l;
+], Re = {};
+function Pe(s, g, h) {
+  g in Re || (Re[g] = []);
+  const m = h || 0;
+  Re[g][m] = s;
 }
-const aa = [].concat(
-  ...ea.map((l) => {
-    const [h, C, d, f, c, p, R] = l, T = {
-      name: h,
-      regions: C,
-      iso2: d,
+const oa = [].concat(
+  ...ia.map((s) => {
+    const [g, h, m, f, l, p, S] = s, y = {
+      name: g,
+      regions: h,
+      iso2: m,
       dialCode: f,
       priority: p || 0,
-      format: c || void 0,
-      hasAreaCodes: !!R
-    }, v = [];
-    return T.hasAreaCodes && R && R.forEach((L) => {
-      const _ = {
-        ...T,
-        regions: C,
-        dialCode: `${f}${L}`,
+      format: l || void 0,
+      hasAreaCodes: !!S
+    }, E = [];
+    return y.hasAreaCodes && S && S.forEach((W) => {
+      const I = {
+        ...y,
+        regions: h,
+        dialCode: `${f}${W}`,
         isAreaCode: !0
       };
-      v.push(_), xe(d, _.dialCode);
-    }), xe(
-      T.iso2,
-      T.dialCode,
-      T.hasAreaCodes ? 1 : 0
-    ), v.length > 0 ? [T, ...v] : [T];
+      E.push(I), Pe(m, I.dialCode);
+    }), Pe(
+      y.iso2,
+      y.dialCode,
+      y.hasAreaCodes ? 1 : 0
+    ), E.length > 0 ? [y, ...E] : [y];
   })
-), Re = {
-  allCountries: aa
-}, Ie = (l, h, C) => {
-  const d = ve(h, { iso2: C }) || {};
-  if (He(l) === "") return d;
-  const f = Ae(
-    h,
-    (c, p) => fe(l, p.dialCode) && (p.dialCode.length > c.dialCode.length || p.dialCode.length === c.dialCode.length && p.priority < c.priority) ? p : c,
+), Te = {
+  allCountries: oa
+}, Ae = (s, g, h) => {
+  const m = fe(g, { iso2: h }) || {};
+  if (ea(s) === "") return m;
+  const f = Fe(
+    g,
+    (l, p) => pe(s, p.dialCode) && (p.dialCode.length > l.dialCode.length || p.dialCode.length === l.dialCode.length && p.priority < l.priority) ? p : l,
     { dialCode: "", priority: 10001 }
   );
-  return f.name ? f : d;
-}, ra = (l) => {
+  return f.name ? f : m;
+}, sa = (s) => {
   const {
-    autoFormat: h = !0,
-    countryCodeEditable: C = !0,
-    defaultCountry: d = "",
+    autoFormat: g = !0,
+    countryCodeEditable: h = !0,
+    defaultCountry: m = "",
     disableAreaCodes: f = !1,
-    disableCountryCode: c = !1,
+    disableCountryCode: l = !1,
     enableLongNumbers: p = !1,
-    excludeCountries: R = [],
-    isModernBrowser: T = () => document.createElement ? !!document.createElement("input").setSelectionRange : !1,
-    keys: v = {
+    excludeCountries: S = [],
+    isModernBrowser: y = () => document.createElement ? !!document.createElement("input").setSelectionRange : !1,
+    keys: E = {
       UP: 38,
       DOWN: 40,
       RIGHT: 39,
@@ -990,343 +991,388 @@ const aa = [].concat(
       Z: 90,
       SPACE: 32
     },
-    onlyCountries: L = [],
-    onChange: _,
-    onEnterKeyPress: W,
-    onKeyDown: M,
-    onBlur: H,
-    onFocus: A,
-    onClick: G,
-    placeholder: ne = "+1 (702) 123-4567",
-    preferredCountries: se = [],
-    regions: J = "",
-    isValid: ie = (a) => Se(
-      Re.allCountries,
-      (n) => fe(a, n.dialCode) || fe(n.dialCode, a)
+    onlyCountries: W = [],
+    onChange: I,
+    onEnterKeyPress: X,
+    onKeyDown: L,
+    onBlur: Q,
+    onFocus: M,
+    onClick: H,
+    placeholder: te = "+1 (702) 123-4567",
+    preferredCountries: ee = [],
+    regions: ae = "",
+    isValid: ie = (a) => Xe(
+      Te.allCountries,
+      (i) => pe(a, i.dialCode) || pe(i.dialCode, a)
     ),
-    value: U = ""
-  } = l, Z = Te({}), V = Te(null), g = ce(() => {
-    let a = Re.allCountries;
-    const n = (o) => o.filter((x) => x.isAreaCode !== !0), s = (o, x) => {
-      if (typeof o == "string") {
-        const re = o;
-        return x.filter(
-          (he) => he.regions.some((le) => le === re)
+    value: O
+  } = s, G = ye({}), V = ye(null), [le, J] = oe(O || "");
+  we(() => {
+    O !== void 0 && J(O);
+  }, [O]);
+  const re = se(
+    () => O !== void 0 ? O : le,
+    [O, le]
+  ), b = se(() => {
+    let a = Te.allCountries;
+    const i = (_) => _.filter(($) => $.isAreaCode !== !0), o = (_, $) => {
+      if (typeof _ == "string") {
+        const ne = _;
+        return $.filter(
+          (Ce) => Ce.regions.some((ue) => ue === ne)
         );
       }
-      return x.filter((re) => o.map(
-        (le) => re.regions.some((Oe) => Oe === le)
-      ).some((le) => le));
-    }, b = (o, x) => o.length === 0 ? x : x.filter(
-      (re) => o.some((he) => he === re.iso2)
-    ), E = (o, x) => x.length === 0 ? o : Ee(
-      o,
-      (re) => !qe(x, re.iso2)
+      return $.filter((ne) => _.map(
+        (ue) => ne.regions.some((ze) => ze === ue)
+      ).some((ue) => ue));
+    }, C = (_, $) => _.length === 0 ? $ : $.filter(
+      (ne) => _.some((Ce) => Ce === ne.iso2)
+    ), v = (_, $) => $.length === 0 ? _ : _e(
+      _,
+      (ne) => !Je($, ne.iso2)
     );
-    return f && (a = n(a)), J && (a = s(J, a)), E(
-      b(L, a),
-      R
+    f && (a = i(a)), ae && (a = o(ae, a));
+    const d = C(
+      W,
+      a
     );
-  }, [f, J, L, R]), I = ce(() => Ee(
-    Re.allCountries,
-    (a) => Se(
-      se,
-      (n) => n === a.iso2
-    )
-  ), [se]), B = y(
-    (a, n) => {
-      let s = "";
-      if (c && n ? s = n.split(" ").slice(1).join(" ") : s = n, !a || a.length === 0)
-        return c ? "" : "+";
-      if (a && a.length < 2 || !s || !h)
-        return c ? a : `+${a}`;
-      const b = Ae(
-        s,
-        (o, x) => o.remainingText.length === 0 ? o : x !== "." ? {
-          formattedText: o.formattedText + x,
-          remainingText: o.remainingText
+    return v(d, [
+      ...S,
+      ...ee
+    ]);
+  }, [
+    f,
+    ae,
+    W,
+    S,
+    ee
+  ]), A = se(() => ee.map((a) => fe(Te.allCountries, { iso2: a })).filter(Boolean), [ee]), F = x(
+    (a, i) => {
+      let o = "";
+      if (l && i ? o = i.split(" ").slice(1).join(" ") : o = i, !a || a.length === 0)
+        return l ? "" : "+";
+      if (a && a.length < 2 || !o || !g)
+        return l ? a : `+${a}`;
+      const C = Fe(
+        o,
+        (d, _) => d.remainingText.length === 0 ? d : _ !== "." ? {
+          formattedText: d.formattedText + _,
+          remainingText: d.remainingText
         } : {
-          formattedText: o.formattedText + Ye(o.remainingText),
-          remainingText: We(o.remainingText)
+          formattedText: d.formattedText + He(d.remainingText),
+          remainingText: Qe(d.remainingText)
         },
         {
           formattedText: "",
           remainingText: a.split("")
         }
       );
-      let E = "";
-      return p ? E = b.formattedText + b.remainingText.join("") : E = b.formattedText, E.includes("(") && !E.includes(")") && (E += ")"), E;
+      let v = "";
+      return p ? v = C.formattedText + C.remainingText.join("") : v = C.formattedText, v.includes("(") && !v.includes(")") && (v += ")"), v;
     },
-    [c, h, p]
-  ), [te, Y] = ue(null), [j, X] = ue(0), [z, O] = ue(""), [F, N] = ue(!1), [Q, q] = ue(ne), e = ce(() => {
-    const a = U || "";
-    let n;
-    return a.length > 1 ? n = Ie(
+    [l, g, p]
+  ), [Z, U] = oe(null), [N, B] = oe(0), [j, Y] = oe(""), [z, e] = oe(!1), [n, u] = oe(te), r = se(() => {
+    const a = re || "";
+    let i;
+    return a.length > 1 ? i = Ae(
       a.replace(/\D/g, "").substring(0, 6),
-      g,
-      d
-    ) || {} : d && (n = ve(g, { iso2: d })), (!n || !n.dialCode) && (n = { dialCode: "", priority: 10001 }), n;
-  }, [U, g, d]), r = ce(() => {
-    const a = U || "", n = a.length < 2 && e && e.dialCode && !fe(a.replace(/\D/g, ""), e.dialCode) ? e.dialCode : "";
-    return a === "" && (!e || !e.name) ? "" : B(
-      (c ? "" : n) + a.replace(/\D/g, ""),
-      e.name ? e.format : void 0
+      b,
+      m
+    ) || {} : m && (i = fe(b, { iso2: m })), (!i || !i.dialCode) && (i = {
+      dialCode: "",
+      priority: 10001,
+      iso2: "",
+      name: "",
+      regions: []
+    }), i;
+  }, [re, b, m]), R = se(() => {
+    const a = re || "", i = a.length < 2 && r && r.dialCode && !pe(a.replace(/\D/g, ""), r.dialCode) ? r.dialCode : "";
+    return a === "" && (!r || !r.name) ? "" : F(
+      (l ? "" : i) + a.replace(/\D/g, ""),
+      r.name ? r.format : void 0
     );
-  }, [U, e, c, B]), t = y((a) => a ? {
+  }, [
+    re,
+    r,
+    l,
+    F
+  ]), T = x((a) => a ? {
     name: a.name || "",
     dialCode: a.dialCode || "",
     countryCode: a.iso2 || ""
-  } : {}, []), u = y(() => {
+  } : {}, []), c = x(() => {
     const a = V.current;
-    if (a && (a.focus(), T?.())) {
-      const n = a.value.length;
-      a.setSelectionRange(n, n);
+    if (a && (a.focus(), y?.())) {
+      const i = a.value.length;
+      a.setSelectionRange(i, i);
     }
-  }, [T]), K = y(
+  }, [y]), w = x(
     (a) => {
-      let n = e, s = c ? "" : "+";
-      if (!C) {
-        const o = `+${n.dialCode}`;
-        if (a.target.value.length < o.length)
+      let i = r, o = l ? "" : "+";
+      if (console.log(
+        "handleInput called with value:",
+        a.target.value,
+        `
+Country Code Editable:`,
+        h
+      ), !h) {
+        const d = `+${i.dialCode}`;
+        if (a.target.value.length < d.length)
           return;
       }
-      if (a.target.value.replace(/\D/g, "").length > 15 || a.target.value === r)
+      if (a.target.value.replace(/\D/g, "").length > 15 || a.target.value === R)
         return;
       if (a.target.value.length > 0) {
-        const o = a.target.value.replace(/\D/g, "");
-        (!F || e.dialCode.length > o.length) && (n = Ie(
-          o.substring(0, 6),
-          g,
-          d
-        ), N(!1)), s = B(
-          o,
-          n.format
+        const d = a.target.value.replace(/\D/g, "");
+        console.log("Processed input number:", d), console.log(
+          "Guess?: ",
+          !z,
+          r.dialCode.length > d.length
+        ), (!z || r.dialCode.length > d.length) && (i = Ae(
+          d.substring(0, 6),
+          b,
+          m
+        ), e(!1)), o = F(
+          d,
+          i.format
         );
       }
-      let b = a.target.selectionStart || 0;
-      const E = s.length - r.length;
-      T?.() && requestAnimationFrame(() => {
-        const o = V.current;
-        if (!o) return;
-        E > 0 && (b -= E), s.charAt(
-          s.length - 1
-        ) === ")" ? o.setSelectionRange(
-          s.length - 1,
-          s.length - 1
-        ) : b > 0 && r.length >= s.length && o.setSelectionRange(b, b);
-      }), _ && _(s, t(n));
+      let C = a.target.selectionStart || 0;
+      const v = o.length - R.length;
+      console.log("Is modern browser:", y?.()), console.log("Caret position before adjustment:", C), console.log("Formatted number:", R), console.log("New formatted number:", o), y?.() && requestAnimationFrame(() => {
+        const d = V.current;
+        if (console.log("Input ref in animation frame:", d), !d) return;
+        v > 0 && (C -= v), o.charAt(
+          o.length - 1
+        ) === ")" ? d.setSelectionRange(
+          o.length - 1,
+          o.length - 1
+        ) : C > 0 && R.length >= o.length && d.setSelectionRange(C, C);
+      }), J(o), I && I(o, T(i));
     },
     [
-      e,
+      r,
+      z,
+      h,
+      l,
+      R,
+      b,
+      m,
       F,
-      C,
-      c,
-      r,
-      g,
-      d,
-      B,
-      T,
-      _,
-      t
+      y,
+      I,
+      T
     ]
-  ), P = y(
+  ), q = x(
     (a) => {
-      const n = Ke(a) ? ve(
-        g,
-        (o) => o.iso2 === a
-      ) : ve(g, a);
-      if (!n) return;
-      const s = r.replace(" ", "").replace("(", "").replace(")", "").replace("-", ""), b = s.length > 1 ? s.replace(
-        e.dialCode,
-        n.dialCode
-      ) : n.dialCode, E = B(
-        b.replace(/\D/g, ""),
-        n.format
+      const i = Ze(a) ? fe(
+        b,
+        (d) => d.iso2 === a
+      ) : fe(b, a);
+      if (!i) return;
+      const o = R.replace(" ", "").replace("(", "").replace(")", "").replace("-", ""), C = o.length > 1 ? o.replace(
+        r.dialCode,
+        i.dialCode
+      ) : i.dialCode, v = F(
+        C.replace(/\D/g, ""),
+        i.format
       );
-      _ && _(E, t(n)), Y(null), N(!0), setTimeout(() => u(), 0);
+      J(v), I && I(v, T(i)), U(null), e(!0), setTimeout(() => c(), 0);
     },
     [
+      R,
       r,
-      e,
-      g,
-      B,
-      _,
-      u,
-      t
+      b,
+      F,
+      I,
+      c,
+      T
     ]
-  ), m = y(
+  ), K = x(
     (a) => {
-      q(""), A && A(a, t(e)), setTimeout(() => u(), 10);
+      u(""), M && M(a, T(r)), setTimeout(() => c(), 10);
     },
-    [A, u, t, e]
-  ), w = y(
+    [M, c, T, r]
+  ), ge = x(
     (a) => {
-      a.target.value || q(ne || ""), H && H(a, t(e));
+      a.target.value || u(te || ""), Q && Q(a, T(r));
     },
-    [ne, H, t, e]
-  ), ee = y(
+    [te, Q, T, r]
+  ), ce = x(
     (a) => {
-      G && G(a, t(e));
+      H && H(a, T(r));
     },
-    [G, t, e]
-  ), D = y(
+    [H, T, r]
+  ), he = x(
     (a) => {
-      v && a.which === v.ENTER && W && W(a), M && M(a);
+      E && a.which === E.ENTER && X && X(a), L && L(a);
     },
-    [v, W, M]
-  ), ae = y((a) => {
+    [E, X, L]
+  ), t = x((a) => {
     !a || !a.parentElement || (a.parentElement.scrollTop = a.offsetTop);
-  }, []), oe = y(
+  }, []), P = x(
     (a) => {
-      const n = g.length + I.length;
-      let s = j + a;
-      return (s < 0 || s >= n) && (s -= a), s;
+      const i = b.length + A.length;
+      let o = N + a;
+      return (o < 0 || o >= i) && (o -= a), o;
     },
-    [j, g, I]
-  ), pe = y(() => {
-    const n = ((E) => !E || E.length === 0 ? null : Ee(
-      g,
-      (o) => fe(o.name.toLowerCase(), E.toLowerCase())
-    )[0])(z) || g[0], s = Ve(g, n) + I.length, b = Z.current[`flag_no_${s}`];
-    ae(b), O(""), X(s);
+    [N, b, A]
+  ), D = x(() => {
+    const i = ((v) => !v || v.length === 0 ? null : _e(
+      b,
+      (d) => pe(d.name.toLowerCase(), v.toLowerCase())
+    )[0])(j) || b[0], o = We(b, i) + A.length, C = G.current[`flag_no_${o}`];
+    t(C), Y(""), B(o);
   }, [
-    z,
-    g,
-    I,
-    ae
-  ]), i = ce(
-    () => Ue(pe, 100),
-    [pe]
-  ), S = y(
+    j,
+    b,
+    A,
+    t
+  ]), Se = se(
+    () => Ke(D, 100),
+    [D]
+  ), be = x(
     // biome-ignore lint/suspicious/noExplicitAny: event type --- IGNORE ---
     (a) => {
-      if (!te || l.disabled || !v) return;
+      if (!Z || s.disabled || !E) return;
       a.preventDefault && a.preventDefault();
-      const n = (s) => {
-        const b = oe(s);
-        X(b);
-        const E = Z.current[`flag_no_${b}`];
-        ae(E);
+      const i = (o) => {
+        const C = P(o);
+        B(C);
+        const v = G.current[`flag_no_${C}`];
+        t(v);
       };
       switch (a.which) {
-        case v.DOWN:
-          n(1);
+        case E.DOWN:
+          i(1);
           break;
-        case v.UP:
-          n(-1);
+        case E.UP:
+          i(-1);
           break;
-        case v.ENTER: {
-          const b = [
-            ...I,
-            ...g
-          ][j];
-          b && P(b);
+        case E.ENTER: {
+          const C = [
+            ...A,
+            ...b
+          ][N];
+          C && q(C);
           break;
         }
-        case v.ESC:
-          Y(null), u();
+        case E.ESC:
+          U(null), c();
           break;
         default:
-          (a.which >= v.A && a.which <= v.Z || a.which === v.SPACE) && (O((s) => s + String.fromCharCode(a.which)), i());
+          (a.which >= E.A && a.which <= E.Z || a.which === E.SPACE) && (Y((o) => o + String.fromCharCode(a.which)), Se());
       }
     },
     [
-      te,
-      j,
-      l.disabled,
-      v,
-      g,
-      I,
-      P,
-      u,
-      i,
-      ae,
-      oe
+      Z,
+      N,
+      s.disabled,
+      E,
+      b,
+      A,
+      q,
+      c,
+      Se,
+      t,
+      P
     ]
   );
-  Fe(() => (document.addEventListener("keydown", S), () => document.removeEventListener("keydown", S)), [S]);
-  const $ = y(
+  we(() => (document.addEventListener("keydown", be), () => document.removeEventListener("keydown", be)), [be]);
+  const Me = x(
     (a) => {
-      V.current = a, l.inputRef && (typeof l.inputRef == "function" ? l.inputRef(a) : l.inputRef.current = a);
+      V.current = a, s.inputRef && (typeof s.inputRef == "function" ? s.inputRef(a) : s.inputRef.current = a);
     },
-    [l.inputRef]
-  ), je = y(() => ie ? ie(r.replace(/\D/g, "")) : !0, [ie, r]);
-  return {
-    formattedNumber: r,
-    selectedCountry: e,
-    highlightCountryIndex: j,
-    queryString: z,
-    freezeSelection: F,
-    anchorEl: te,
-    placeholder: Q,
-    computedOnlyCountries: g,
-    computedPreferredCountries: I,
-    flagsRef: Z,
+    [s.inputRef]
+  ), Be = x(() => ie ? ie(R.replace(/\D/g, "")) : !0, [ie, R]);
+  return De({
+    formattedNumber: R,
+    selectedCountry: r,
+    highlightCountryIndex: N,
+    queryString: j,
+    freezeSelection: z,
+    anchorEl: Z,
+    currentPlaceholder: n,
+    computedOnlyCountries: b,
+    computedPreferredCountries: A,
+    flagsRef: G,
+    inputRef: V
+  }), {
+    formattedNumber: R,
+    selectedCountry: r,
+    highlightCountryIndex: N,
+    queryString: j,
+    freezeSelection: z,
+    anchorEl: Z,
+    placeholder: n,
+    computedOnlyCountries: b,
+    computedPreferredCountries: A,
+    flagsRef: G,
     inputRef: V,
-    setAnchorEl: Y,
-    setHighlightCountryIndex: X,
-    setQueryString: O,
-    setFreezeSelection: N,
-    setCurrentPlaceholder: q,
-    handleInput: K,
-    handleInputClick: ee,
-    handleInputFocus: m,
-    handleInputBlur: w,
-    handleKeydown: S,
-    handleInputKeyDown: D,
-    handleRefInput: $,
-    handleFlagItemClick: P,
-    isValid: je
+    setAnchorEl: U,
+    setHighlightCountryIndex: B,
+    setQueryString: Y,
+    setFreezeSelection: e,
+    setCurrentPlaceholder: u,
+    handleInput: w,
+    handleInputClick: ce,
+    handleInputFocus: K,
+    handleInputBlur: ge,
+    handleKeydown: be,
+    handleInputKeyDown: he,
+    handleRefInput: Me,
+    handleFlagItemClick: q,
+    isValid: Be
   };
-}, Sa = (l) => {
+}, Ia = (s) => {
   const {
-    autoFormat: h,
-    classes: C,
-    countryCodeEditable: d,
+    autoFormat: g,
+    classes: h,
+    countryCodeEditable: m,
     defaultCountry: f,
-    disableAreaCodes: c,
+    disableAreaCodes: l,
     disableCountryCode: p,
-    disableDropdown: R,
-    dropdownClass: T,
-    enableLongNumbers: v,
-    excludeCountries: L,
-    inputClass: _,
-    onlyCountries: W,
-    preferredCountries: M,
-    regions: H,
-    localization: A,
-    isValid: G,
-    isModernBrowser: ne,
-    keys: se,
-    native: J,
+    disableDropdown: S,
+    dropdownClass: y,
+    enableLongNumbers: E,
+    excludeCountries: W,
+    inputClass: I,
+    onlyCountries: X,
+    preferredCountries: L,
+    regions: Q,
+    localization: M,
+    isValid: H,
+    isModernBrowser: te,
+    keys: ee,
+    native: ae,
     onEnterKeyPress: ie,
-    error: U,
-    InputProps: Z,
+    error: O,
+    InputProps: G,
     variant: V = "standard",
-    onChange: g,
-    onFocus: I,
-    onBlur: B,
-    onClick: te,
-    onKeyDown: Y,
-    ...j
-  } = l, {
-    formattedNumber: X,
-    placeholder: z,
-    selectedCountry: O,
-    anchorEl: F,
-    flagsRef: N,
-    setAnchorEl: Q,
-    handleInput: q,
+    onChange: le,
+    onFocus: J,
+    onBlur: re,
+    onClick: b,
+    onKeyDown: A,
+    ...F
+  } = s, {
+    formattedNumber: Z,
+    placeholder: U,
+    selectedCountry: N,
+    anchorEl: B,
+    flagsRef: j,
+    setAnchorEl: Y,
+    handleInput: z,
     handleInputClick: e,
-    handleInputFocus: r,
-    handleInputBlur: t,
-    handleInputKeyDown: u,
-    handleRefInput: K,
-    handleFlagItemClick: P,
-    computedOnlyCountries: m,
+    handleInputFocus: n,
+    handleInputBlur: u,
+    handleInputKeyDown: r,
+    handleRefInput: R,
+    handleFlagItemClick: T,
+    computedOnlyCountries: c,
     computedPreferredCountries: w,
-    isValid: ee
-  } = ra(l), D = {
+    isValid: q
+  } = sa(s), K = {
     flagButton: {
       minWidth: 30,
       padding: 0,
@@ -1345,110 +1391,110 @@ const aa = [].concat(
       height: 24,
       paddingRight: 8
     }
-  }, ae = (i) => !!(O && O.dialCode === i.dialCode), oe = Pe[O.iso2.toUpperCase()] || void 0, pe = R ? {} : {
-    startAdornment: /* @__PURE__ */ k.jsx(ze, { style: D.positionStart, position: "start", children: J ? /* @__PURE__ */ k.jsxs(
-      $e,
+  }, ge = (t) => !!(N && N.dialCode === t.dialCode), ce = N.iso2 ? Oe[N.iso2.toUpperCase()] : void 0, he = S ? {} : {
+    startAdornment: /* @__PURE__ */ k.jsx(Ge, { style: K.positionStart, position: "start", children: ae ? /* @__PURE__ */ k.jsxs(
+      Ue,
       {
         id: "country-menu",
-        style: D.native,
-        onChange: (i) => P(i.target.value),
-        IconComponent: oe,
+        style: K.native,
+        onChange: (t) => T(t.target.value),
+        IconComponent: ce,
         disableUnderline: !0,
         children: [
-          !!w.length && ge(
+          !!w.length && ve(
             w,
-            (i, S) => /* @__PURE__ */ k.jsx(
-              Ce,
+            (t, P) => /* @__PURE__ */ k.jsx(
+              ke,
               {
-                itemRef: ($) => {
-                  N.current[`flag_no_${S}`] = $;
+                itemRef: (D) => {
+                  j.current[`flag_no_${P}`] = D;
                 },
-                name: i.name,
-                iso2: i.iso2,
-                dialCode: i.dialCode,
-                localization: A?.[i.name],
+                name: t.name,
+                iso2: t.iso2,
+                dialCode: t.dialCode,
+                localization: M?.[t.name],
                 native: !0
               },
-              `preferred_${i.iso2}_${S}`
+              `preferred_${t.iso2}_${P}`
             )
           ),
-          ge(
-            m,
-            (i, S) => /* @__PURE__ */ k.jsx(
-              Ce,
+          ve(
+            c,
+            (t, P) => /* @__PURE__ */ k.jsx(
+              ke,
               {
-                itemRef: ($) => {
-                  N.current[`flag_no_${S}`] = $;
+                itemRef: (D) => {
+                  j.current[`flag_no_${P + w.length}`] = D;
                 },
-                name: i.name,
-                iso2: i.iso2,
-                dialCode: i.dialCode,
-                localization: A?.[i.name],
+                name: t.name,
+                iso2: t.iso2,
+                dialCode: t.dialCode,
+                localization: M?.[t.name],
                 native: !0
               },
-              `preferred_${i.iso2}_${S}`
+              `country_${t.iso2}_${P}`
             )
           )
         ]
       }
     ) : /* @__PURE__ */ k.jsxs(k.Fragment, { children: [
       /* @__PURE__ */ k.jsx(
-        Be,
+        Le,
         {
-          style: D.flagButton,
-          "aria-owns": F ? "country-menu" : void 0,
+          style: K.flagButton,
+          "aria-owns": B ? "country-menu" : void 0,
           "aria-label": "Select country",
-          onClick: (i) => Q(i.currentTarget),
+          onClick: (t) => Y(t.currentTarget),
           "aria-haspopup": !0,
-          children: !!oe && /* @__PURE__ */ k.jsx(oe, { className: "margin" })
+          children: !!ce && /* @__PURE__ */ k.jsx(ce, { className: "margin" })
         }
       ),
       /* @__PURE__ */ k.jsxs(
-        De,
+        Ve,
         {
-          className: T,
+          className: y,
           id: "country-menu",
-          anchorEl: F,
-          open: !!F,
-          onClose: () => Q(null),
+          anchorEl: B,
+          open: !!B,
+          onClose: () => Y(null),
           children: [
-            !!w.length && ge(
+            !!w.length && ve(
               w,
-              (i, S) => /* @__PURE__ */ k.jsx(
-                Ce,
+              (t, P) => /* @__PURE__ */ k.jsx(
+                ke,
                 {
-                  itemRef: ($) => {
-                    N.current[`flag_no_${S}`] = $;
+                  itemRef: (D) => {
+                    j.current[`flag_no_${P}`] = D;
                   },
-                  selected: ae(i),
-                  onClick: () => P(i),
-                  name: i.name,
-                  iso2: i.iso2,
-                  dialCode: i.dialCode,
-                  localization: A?.[i.name],
-                  style: D.flagIcon
+                  selected: ge(t),
+                  onClick: () => T(t),
+                  name: t.name,
+                  iso2: t.iso2,
+                  dialCode: t.dialCode,
+                  localization: M?.[t.name],
+                  style: K.flagIcon
                 },
-                `preferred_${i.iso2}_${S}`
+                `preferred_${t.iso2}_${P}`
               )
             ),
-            !!w.length && /* @__PURE__ */ k.jsx(Me, {}),
-            ge(
-              m,
-              (i, S) => /* @__PURE__ */ k.jsx(
-                Ce,
+            !!w.length && /* @__PURE__ */ k.jsx($e, {}),
+            ve(
+              c,
+              (t, P) => /* @__PURE__ */ k.jsx(
+                ke,
                 {
-                  itemRef: ($) => {
-                    N.current[`flag_no_${S}`] = $;
+                  itemRef: (D) => {
+                    j.current[`flag_no_${P + w.length}`] = D;
                   },
-                  selected: ae(i),
-                  onClick: () => P(i),
-                  name: i.name,
-                  iso2: i.iso2,
-                  dialCode: i.dialCode,
-                  localization: A?.[i.name],
-                  style: D.flagIcon
+                  selected: ge(t),
+                  onClick: () => T(t),
+                  name: t.name,
+                  iso2: t.iso2,
+                  dialCode: t.dialCode,
+                  localization: M?.[t.name],
+                  style: K.flagIcon
                 },
-                `preferred_${i.iso2}_${S}`
+                `country_${t.iso2}_${P}`
               )
             )
           ]
@@ -1457,28 +1503,34 @@ const aa = [].concat(
     ] }) })
   };
   return /* @__PURE__ */ k.jsx(
-    Le,
+    Ye,
     {
       variant: V,
-      placeholder: z,
-      value: X,
-      className: _,
-      inputRef: K,
-      error: U || !ee(),
-      onChange: q,
+      placeholder: U,
+      value: Z,
+      className: I,
+      inputRef: R,
+      error: O || !q(),
+      onChange: z,
       onClick: e,
-      onFocus: r,
-      onBlur: t,
-      onKeyDown: u,
+      onFocus: n,
+      onBlur: u,
+      onKeyDown: r,
       type: "tel",
       InputProps: {
-        ...pe,
-        ...Z
+        ...he,
+        ...G
       },
-      ...j
+      slotProps: {
+        input: {
+          ...he,
+          ...G
+        }
+      },
+      ...F
     }
   );
 };
 export {
-  Sa as default
+  Ia as default
 };
