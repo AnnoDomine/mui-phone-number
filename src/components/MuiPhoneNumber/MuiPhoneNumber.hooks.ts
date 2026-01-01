@@ -75,15 +75,15 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
       Z: 90,
       SPACE: 32,
     },
-    onlyCountries = [],
+    onlyCountries: propsOnlyCountries = [],
     onChange,
     onEnterKeyPress,
     onKeyDown,
     onBlur,
     onFocus,
     onClick,
-    placeholder = '+1 (702) 123-4567',
-    preferredCountries = [],
+    placeholder: propsPlaceholder = '+1 (702) 123-4567',
+    preferredCountries: propsPreferredCountries = [],
     regions = '',
     isValid = (inputNumber: string) =>
       some(
@@ -149,23 +149,23 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
     if (regions) filteredCountries = filterRegions(regions, filteredCountries);
 
     return excludeCountriesFunc(
-      getOnlyCountriesFunc(onlyCountries, filteredCountries),
+      getOnlyCountriesFunc(propsOnlyCountries, filteredCountries),
       excludeCountries,
     );
-  }, [disableAreaCodes, regions, onlyCountries, excludeCountries]);
+  }, [disableAreaCodes, regions, propsOnlyCountries, excludeCountries]);
 
   const computedPreferredCountries = useMemo(() => {
     return filter(countryData.allCountries, (country) =>
       some(
-        preferredCountries,
+        propsPreferredCountries,
         (preferredCountry) => preferredCountry === country.iso2,
       ),
     );
-  }, [preferredCountries]);
+  }, [propsPreferredCountries]);
 
-  // -- Helpers --
+  // -- Helpers (Pure Logic) --
 
-  const formatNumber = useCallback(
+  const formatDisplayedNumber = useCallback(
     (text: string, patternArg?: string) => {
       let pattern: string | undefined = '';
       if (disableCountryCode && patternArg) {
@@ -210,136 +210,84 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
         },
       );
 
-      let formattedNumber = '';
+      let localFormattedNumber = '';
       if (enableLongNumbers) {
-        formattedNumber =
+        localFormattedNumber =
           formattedObject.formattedText +
           formattedObject.remainingText.join('');
       } else {
-        formattedNumber = formattedObject.formattedText;
+        localFormattedNumber = formattedObject.formattedText;
       }
 
-      if (formattedNumber.includes('(') && !formattedNumber.includes(')'))
-        formattedNumber += ')';
-      return formattedNumber;
+      if (localFormattedNumber.includes('(') && !localFormattedNumber.includes(')'))
+        localFormattedNumber += ')';
+      return localFormattedNumber;
     },
     [disableCountryCode, autoFormat, enableLongNumbers],
   );
 
-  // -- State Initialization --
+  // -- Internal State (for UI focus, dropdown, etc. - not primary value) --
 
-  const [state, setState] = useState(() => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [highlightCountryIndex, setHighlightCountryIndex] = useState(0);
+  const [queryString, setQueryString] = useState('');
+  const [freezeSelection, setFreezeSelection] = useState(false);
+  const [currentPlaceholder, setCurrentPlaceholder] = useState(propsPlaceholder);
+
+  // -- Derived State (from props and internal UI state) --
+
+  const selectedCountry = useMemo(() => {
     const inputNum = (value as string) || '';
-    let countryGuess: Country | undefined;
+    let country: Country | undefined;
 
     if (inputNum.length > 1) {
-      countryGuess =
+      country =
         guessSelectedCountry(
           inputNum.replace(/\D/g, '').substring(0, 6),
           computedOnlyCountries,
           defaultCountry,
         ) || ({} as Country);
     } else if (defaultCountry) {
-      countryGuess = find(computedOnlyCountries, { iso2: defaultCountry });
+      country = find(computedOnlyCountries, { iso2: defaultCountry });
     }
 
-    if (!countryGuess || !countryGuess.dialCode) {
-      countryGuess = { dialCode: '', priority: 10001 } as Country;
+    if (!country || !country.dialCode) {
+      country = { dialCode: '', priority: 10001 } as Country;
     }
+    return country;
+  }, [value, computedOnlyCountries, defaultCountry]);
 
+  const formattedNumber = useMemo(() => {
+    const inputNum = (value as string) || '';
     const dialCode =
       inputNum.length < 2 &&
-      countryGuess &&
-      countryGuess.dialCode &&
-      !startsWith(inputNum.replace(/\D/g, ''), countryGuess.dialCode)
-        ? countryGuess.dialCode
+      selectedCountry &&
+      selectedCountry.dialCode &&
+      !startsWith(inputNum.replace(/\D/g, ''), selectedCountry.dialCode)
+        ? selectedCountry.dialCode
         : '';
 
-    const formattedNumber =
-      inputNum === '' && (!countryGuess || !countryGuess.name)
-        ? ''
-        : formatNumber(
-            (disableCountryCode ? '' : dialCode) + inputNum.replace(/\D/g, ''),
-            countryGuess.name ? countryGuess.format : undefined,
-          );
-
-    return {
-      formattedNumber,
-      placeholder: placeholder || '',
-      selectedCountry: countryGuess,
-      highlightCountryIndex: 0,
-      queryString: '',
-      freezeSelection: false,
-      anchorEl: null as HTMLElement | null,
-    };
-  });
-
-  // -- Effects --
-
-  // Update when defaultCountry changes
-  useEffect(() => {
-    if (defaultCountry && defaultCountry !== state.selectedCountry.iso2) {
-      const newSelectedCountry =
-        find(computedOnlyCountries, { iso2: defaultCountry }) ||
-        ({} as Country);
-      setState((prev) => ({
-        ...prev,
-        selectedCountry: newSelectedCountry,
-        formattedNumber: disableCountryCode
-          ? ''
-          : `+${newSelectedCountry.dialCode}`,
-      }));
-    }
-  }, [defaultCountry, computedOnlyCountries, disableCountryCode, state.selectedCountry.iso2]);
-
-  // Update when value changes
-  useEffect(() => {
-    if (value !== state.formattedNumber) {
-      const inputNum = (value as string) || '';
-      let countryGuess: Country | undefined;
-      let newFormattedNumber = inputNum;
-
-      if (!inputNum.startsWith('+')) {
-        countryGuess = find(computedOnlyCountries, { iso2: defaultCountry });
-        const dialCode =
-          countryGuess &&
-          !startsWith(inputNum.replace(/\D/g, ''), countryGuess.dialCode)
-            ? countryGuess.dialCode
-            : '';
-        newFormattedNumber = formatNumber(
+    return inputNum === '' && (!selectedCountry || !selectedCountry.name)
+      ? ''
+      : formatDisplayedNumber(
           (disableCountryCode ? '' : dialCode) + inputNum.replace(/\D/g, ''),
-          countryGuess ? countryGuess.format : undefined,
+          selectedCountry.name ? selectedCountry.format : undefined,
         );
-      } else {
-        const cleanInputNum = inputNum.replace(/\D/g, '');
-        countryGuess = guessSelectedCountry(
-          cleanInputNum.substring(0, 6),
-          computedOnlyCountries,
-          defaultCountry,
-        ) as Country;
-        newFormattedNumber = formatNumber(cleanInputNum, countryGuess.format);
-      }
-
-      if (countryGuess) {
-        setState((prev) => ({
-          ...prev,
-          selectedCountry: countryGuess!,
-          formattedNumber: newFormattedNumber,
-        }));
-      }
-    }
-  }, [value, defaultCountry, computedOnlyCountries, disableCountryCode, formatNumber, state.formattedNumber]);
+  }, [value, selectedCountry, disableCountryCode, formatDisplayedNumber]);
 
   // -- Handlers --
 
-  const getCountryData = (selectedCountry: Country) => {
-    if (!selectedCountry) return {} as Country;
-    return {
-      name: selectedCountry.name || '',
-      dialCode: selectedCountry.dialCode || '',
-      countryCode: selectedCountry.iso2 || '',
-    } as unknown as Country;
-  };
+  const getCountryData = useCallback(
+    (country: Country) => {
+      if (!country) return {} as Country;
+      return {
+        name: country.name || '',
+        dialCode: country.dialCode || '',
+        countryCode: country.iso2 || '',
+      } as unknown as Country;
+    },
+    [],
+  );
 
   const cursorToEnd = useCallback(() => {
     const input = inputRef.current;
@@ -354,12 +302,12 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
 
   const handleInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      let { selectedCountry, freezeSelection } = state;
-      let newSelectedCountry = selectedCountry;
+      let currentSelectedCountry = selectedCountry;
+      
       let newFormattedNumber = disableCountryCode ? '' : '+';
 
       if (!countryCodeEditable) {
-        const updatedInput = `+${newSelectedCountry.dialCode}`;
+        const updatedInput = `+${currentSelectedCountry.dialCode}`;
         if (e.target.value.length < updatedInput.length) {
           return;
         }
@@ -369,7 +317,7 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
         return;
       }
 
-      if (e.target.value === state.formattedNumber) {
+      if (e.target.value === formattedNumber) {
         return;
       }
 
@@ -379,25 +327,18 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
           !freezeSelection ||
           selectedCountry.dialCode.length > inputNumber.length
         ) {
-          newSelectedCountry = guessSelectedCountry(
+          currentSelectedCountry = guessSelectedCountry(
             inputNumber.substring(0, 6),
             computedOnlyCountries,
             defaultCountry,
           ) as Country;
-          freezeSelection = false;
+          setFreezeSelection(false);
         }
-        newFormattedNumber = formatNumber(inputNumber, newSelectedCountry.format);
+        newFormattedNumber = formatDisplayedNumber(inputNumber, currentSelectedCountry.format);
       }
 
       let caretPosition = e.target.selectionStart || 0;
-      const diff = newFormattedNumber.length - state.formattedNumber.length;
-
-      setState((prev) => ({
-        ...prev,
-        formattedNumber: newFormattedNumber,
-        freezeSelection,
-        selectedCountry: newSelectedCountry.dialCode ? newSelectedCountry : selectedCountry,
-      }));
+      const diff = newFormattedNumber.length - formattedNumber.length;
 
       if (isModernBrowser && isModernBrowser()) {
         requestAnimationFrame(() => {
@@ -416,7 +357,7 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
             );
           } else if (
             caretPosition > 0 &&
-            state.formattedNumber.length >= newFormattedNumber.length
+            formattedNumber.length >= newFormattedNumber.length
           ) {
             input.setSelectionRange(caretPosition, caretPosition);
           }
@@ -424,31 +365,33 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
       }
 
       if (onChange) {
-        onChange(newFormattedNumber, getCountryData(newSelectedCountry));
+        onChange(newFormattedNumber, getCountryData(currentSelectedCountry));
       }
     },
     [
-      state,
+      selectedCountry,
+      freezeSelection,
       countryCodeEditable,
       disableCountryCode,
+      formattedNumber,
       computedOnlyCountries,
       defaultCountry,
-      formatNumber,
+      formatDisplayedNumber,
       isModernBrowser,
       onChange,
+      getCountryData,
     ],
   );
 
   const handleFlagItemClick = useCallback(
     (country: string | Country) => {
-      const currentSelectedCountry = state.selectedCountry;
       const nextSelectedCountry = isString(country)
         ? find(computedOnlyCountries, (countryItem) => countryItem.iso2 === country)
         : find(computedOnlyCountries, country);
 
       if (!nextSelectedCountry) return;
 
-      const unformattedNumber = state.formattedNumber
+      const unformattedNumber = formattedNumber
         .replace(' ', '')
         .replace('(', '')
         .replace(')', '')
@@ -456,123 +399,119 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
       const newNumber =
         unformattedNumber.length > 1
           ? unformattedNumber.replace(
-              currentSelectedCountry.dialCode,
+              selectedCountry.dialCode,
               nextSelectedCountry.dialCode,
             )
           : nextSelectedCountry.dialCode;
 
-      const newFormattedNumber = formatNumber(
+      const newFormattedNumber = formatDisplayedNumber(
         newNumber.replace(/\D/g, ''),
         nextSelectedCountry.format,
       );
 
-      setState((prev) => ({
-        ...prev,
-        anchorEl: null,
-        selectedCountry: nextSelectedCountry,
-        freezeSelection: true,
-        formattedNumber: newFormattedNumber,
-      }));
-
-      setTimeout(() => cursorToEnd(), 0);
-
       if (onChange) {
         onChange(newFormattedNumber, getCountryData(nextSelectedCountry));
       }
+
+      setAnchorEl(null);
+      setFreezeSelection(true);
+      setTimeout(() => cursorToEnd(), 0);
     },
     [
-      state.selectedCountry,
-      state.formattedNumber,
+      formattedNumber,
+      selectedCountry,
       computedOnlyCountries,
-      formatNumber,
+      formatDisplayedNumber,
       onChange,
       cursorToEnd,
+      getCountryData,
     ],
   );
 
   const handleInputFocus = useCallback(
     (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      if (inputRef.current) {
-        if (
-          inputRef.current.value === '+' &&
-          state.selectedCountry &&
-          !disableCountryCode
-        ) {
-          const newFormatted = `+${state.selectedCountry.dialCode}`;
-          setState((prev) => ({ ...prev, formattedNumber: newFormatted }));
-          setTimeout(() => cursorToEnd(), 10);
-        }
-      }
-
-      setState((prev) => ({ ...prev, placeholder: '' }));
-
+      setCurrentPlaceholder('');
       if (onFocus) {
-        onFocus(e, getCountryData(state.selectedCountry));
+        onFocus(e, getCountryData(selectedCountry));
       }
-
       setTimeout(() => cursorToEnd(), 10);
     },
-    [
-      state.selectedCountry,
-      disableCountryCode,
-      onFocus,
-      cursorToEnd,
-    ],
+    [onFocus, cursorToEnd, getCountryData, selectedCountry],
   );
 
   const handleInputBlur = useCallback(
     (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       if (!e.target.value) {
-        setState((prev) => ({ ...prev, placeholder: placeholder || '' }));
+        setCurrentPlaceholder(propsPlaceholder || '');
       }
       if (onBlur) {
-        onBlur(e, getCountryData(state.selectedCountry));
+        onBlur(e, getCountryData(selectedCountry));
       }
     },
-    [placeholder, onBlur, state.selectedCountry],
+    [propsPlaceholder, onBlur, getCountryData, selectedCountry],
   );
 
   const handleInputClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (onClick) {
-        onClick(e, getCountryData(state.selectedCountry));
+        onClick(e, getCountryData(selectedCountry));
       }
     },
-    [onClick, state.selectedCountry],
+    [onClick, getCountryData, selectedCountry],
+  );
+  
+  const handleInputKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (keys && e.which === keys.ENTER && onEnterKeyPress) {
+        onEnterKeyPress(e);
+      }
+      if (onKeyDown) {
+        onKeyDown(e);
+      }
+    },
+    [keys, onEnterKeyPress, onKeyDown],
   );
 
   // -- Dropdown Utils --
 
-  const scrollTo = useCallback((country: HTMLElement | null) => {
-    if (!country || !country.parentElement) return;
-    country.parentElement.scrollTop = country.offsetTop;
+  const scrollTo = useCallback((countryElement: HTMLElement | null) => {
+    if (!countryElement || !countryElement.parentElement) return;
+    countryElement.parentElement.scrollTop = countryElement.offsetTop;
   }, []);
 
+  const getHighlightCountryIndex = useCallback((direction: number) => {
+    const totalCount =
+      computedOnlyCountries.length + computedPreferredCountries.length;
+    let newIndex = highlightCountryIndex + direction;
+
+    if (newIndex < 0 || newIndex >= totalCount) {
+      newIndex -= direction;
+    }
+    return newIndex;
+  }, [highlightCountryIndex, computedOnlyCountries, computedPreferredCountries]);
+
   const searchCountry = useCallback(() => {
-    const getProbableCandidate = (queryString: string) => {
-        if (!queryString || queryString.length === 0) return null;
-        return filter(
-            computedOnlyCountries,
-            (country) =>
-              startsWith(country.name.toLowerCase(), queryString.toLowerCase()),
-          )[0];
+    const getProbableCandidate = (searchQuery: string) => {
+      if (!searchQuery || searchQuery.length === 0) return null;
+      return filter(
+        computedOnlyCountries,
+        (country) =>
+          startsWith(country.name.toLowerCase(), searchQuery.toLowerCase()),
+      )[0];
     };
 
     const probableCandidate =
-      getProbableCandidate(state.queryString) || computedOnlyCountries[0];
-    const probableCandidateIndex =
+      getProbableCandidate(queryString) || computedOnlyCountries[0];
+    const newHighlightCountryIndex =
       findIndex(computedOnlyCountries, probableCandidate) +
       computedPreferredCountries.length;
 
-    const element = flagsRef.current[`flag_no_${probableCandidateIndex}`];
+    const element = flagsRef.current[`flag_no_${newHighlightCountryIndex}`];
     scrollTo(element);
 
-    setState((prev) => ({
-      ...prev,
-      queryString: '',
-      highlightCountryIndex: probableCandidateIndex,
-    }));
-  }, [state.queryString, computedOnlyCountries, computedPreferredCountries, scrollTo]);
+    setQueryString('');
+    setHighlightCountryIndex(newHighlightCountryIndex);
+  }, [queryString, computedOnlyCountries, computedPreferredCountries, scrollTo]);
 
   const debouncedSearchCountry = useMemo(
     () => debounce(searchCountry, 100),
@@ -581,20 +520,13 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
 
   const handleKeydown = useCallback(
     (e: any) => {
-      if (!state.anchorEl || props.disabled || !keys) return;
+      if (!anchorEl || props.disabled || !keys) return;
 
       if (e.preventDefault) e.preventDefault();
 
       const moveHighlight = (direction: number) => {
-        const totalCount =
-          computedOnlyCountries.length + computedPreferredCountries.length;
-        let newIndex = state.highlightCountryIndex + direction;
-
-        if (newIndex < 0 || newIndex >= totalCount) {
-          newIndex -= direction;
-        }
-
-        setState((prev) => ({ ...prev, highlightCountryIndex: newIndex }));
+        const newIndex = getHighlightCountryIndex(direction);
+        setHighlightCountryIndex(newIndex);
         const element = flagsRef.current[`flag_no_${newIndex}`];
         scrollTo(element);
       };
@@ -611,12 +543,12 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
             ...computedPreferredCountries,
             ...computedOnlyCountries,
           ];
-          const selected = allItems[state.highlightCountryIndex];
+          const selected = allItems[highlightCountryIndex];
           if (selected) handleFlagItemClick(selected);
           break;
         }
         case keys.ESC:
-          setState((prev) => ({ ...prev, anchorEl: null }));
+          setAnchorEl(null);
           cursorToEnd();
           break;
         default:
@@ -624,17 +556,14 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
             (e.which >= keys.A && e.which <= keys.Z) ||
             e.which === keys.SPACE
           ) {
-            setState((prev) => ({
-              ...prev,
-              queryString: prev.queryString + String.fromCharCode(e.which),
-            }));
+            setQueryString((prev) => prev + String.fromCharCode(e.which));
             debouncedSearchCountry();
           }
       }
     },
     [
-      state.anchorEl,
-      state.highlightCountryIndex,
+      anchorEl,
+      highlightCountryIndex,
       props.disabled,
       keys,
       computedOnlyCountries,
@@ -643,6 +572,7 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
       cursorToEnd,
       debouncedSearchCountry,
       scrollTo,
+      getHighlightCountryIndex,
     ],
   );
 
@@ -661,24 +591,31 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
     },
     [props.inputRef],
   );
-
-  const handleInputKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLDivElement>) => {
-      if (keys && e.which === keys.ENTER && onEnterKeyPress) {
-        onEnterKeyPress(e);
-      }
-      if (onKeyDown) {
-        onKeyDown(e);
-      }
-    },
-    [keys, onEnterKeyPress, onKeyDown],
-  );
+  
+  const checkIfValid = useCallback(() => {
+    if (isValid) {
+      return isValid(formattedNumber.replace(/\D/g, ''));
+    }
+    return true;
+  }, [isValid, formattedNumber]);
 
   return {
-    state,
-    setState,
+    formattedNumber,
+    selectedCountry,
+    highlightCountryIndex,
+    queryString,
+    freezeSelection,
+    anchorEl,
+    placeholder: currentPlaceholder,
+    computedOnlyCountries,
+    computedPreferredCountries,
     flagsRef,
     inputRef,
+    setAnchorEl,
+    setHighlightCountryIndex,
+    setQueryString,
+    setFreezeSelection,
+    setCurrentPlaceholder,
     handleInput,
     handleInputClick,
     handleInputFocus,
@@ -687,8 +624,6 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
     handleInputKeyDown,
     handleRefInput,
     handleFlagItemClick,
-    computedOnlyCountries,
-    computedPreferredCountries,
-    isValid: () => isValid(state.formattedNumber.replace(/\D/g, '')),
+    isValid: checkIfValid,
   };
 };

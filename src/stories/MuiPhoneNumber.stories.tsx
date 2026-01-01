@@ -3,7 +3,7 @@ import MuiPhoneNumber from '../index';
 
 const meta: Meta<typeof MuiPhoneNumber> = {
   title: 'Components/MuiPhoneNumber',
-  component: MuiPhoneNumber as any,
+  component: MuiPhoneNumber,
   parameters: {
     layout: 'centered',
   },

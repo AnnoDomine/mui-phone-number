@@ -2,7 +2,7 @@ import type { TextFieldProps } from '@mui/material';
 import type * as React from 'react';
 import type { Country } from '../../country_data';
 
-export interface MuiPhoneNumberProps extends Omit<TextFieldProps, 'onChange'> {
+export interface MuiPhoneNumberProps extends Omit<TextFieldProps, 'onChange' | 'value'> {
   autoFormat?: boolean;
   // biome-ignore lint/suspicious/noExplicitAny: complex MUI type
   classes?: any;
@@ -52,6 +52,7 @@ export interface MuiPhoneNumberProps extends Omit<TextFieldProps, 'onChange'> {
     SPACE: number;
   };
   native?: boolean;
+  value?: string;
 }
 
 export interface MuiPhoneNumberState {

@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import MaterialUiPhoneNumber from './index';
 
+// biome-ignore lint/suspicious/noEmptyInterface: Only for demo purposes
 interface DemoProps {}
 interface DemoState {
   number: string;

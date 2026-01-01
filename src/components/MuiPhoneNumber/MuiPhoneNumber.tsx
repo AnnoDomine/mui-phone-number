@@ -21,33 +21,31 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
     localization,
     inputClass,
     error,
-    InputProps,
+    InputProps: externalInputProps,
     variant = 'standard',
     ...restProps
   } = props;
-
-  const {
-    state,
-    setState,
-    flagsRef,
-    handleInput,
-    handleInputClick,
-    handleInputFocus,
-    handleInputBlur,
-    handleKeydown,
-    handleRefInput,
-    handleFlagItemClick,
-    computedOnlyCountries,
-    computedPreferredCountries,
-    isValid,
-  } = useMuiPhoneNumber(props);
 
   const {
     formattedNumber,
     placeholder: statePlaceholder,
     selectedCountry,
     anchorEl,
-  } = state;
+    flagsRef,
+    // biome-ignore lint/correctness/noUnusedVariables: inputRef from hook is passed correctly to TextField as handleRefInput
+    inputRef,
+    setAnchorEl,
+    handleInput,
+    handleInputClick,
+    handleInputFocus,
+    handleInputBlur,
+    handleInputKeyDown,
+    handleRefInput,
+    handleFlagItemClick,
+    computedOnlyCountries,
+    computedPreferredCountries,
+    isValid,
+  } = useMuiPhoneNumber(props);
 
   const styles = {
     flagButton: {
@@ -95,10 +93,9 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
               <NativeSelect
                 id="country-menu"
                 style={styles.native}
-                sx={{
-                  root: styles.nativeRoot,
-                  select: styles.nativeSelect,
-                }}
+                // biome-ignore lint/complexity/noUselessFragments: <explanation>
+                // open={Boolean(anchorEl)} - NativeSelect does not support open prop
+                // onClose={() => setAnchorEl(null)}
                 onChange={(e) => handleFlagItemClick(e.target.value)}
                 IconComponent={Boolean(FlagComponent) && FlagComponent}
                 disableUnderline
@@ -144,9 +141,7 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
                   style={styles.flagButton}
                   aria-owns={anchorEl ? 'country-menu' : undefined}
                   aria-label="Select country"
-                  onClick={(e) =>
-                    setState((prev) => ({ ...prev, anchorEl: e.currentTarget }))
-                  }
+                  onClick={(e) => setAnchorEl(e.currentTarget)}
                   aria-haspopup
                 >
                   {Boolean(FlagComponent) && (
@@ -159,9 +154,7 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
                   id="country-menu"
                   anchorEl={anchorEl}
                   open={Boolean(anchorEl)}
-                  onClose={() =>
-                    setState((prev) => ({ ...prev, anchorEl: null }))
-                  }
+                  onClose={() => setAnchorEl(null)}
                 >
                   {!!computedPreferredCountries.length &&
                     map(
@@ -222,11 +215,11 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
       onClick={handleInputClick}
       onFocus={handleInputFocus}
       onBlur={handleInputBlur}
-      onKeyDown={handleKeydown}
+      onKeyDown={handleInputKeyDown}
       type="tel"
       InputProps={{
         ...dropdownProps,
-        ...InputProps,
+        ...externalInputProps,
       }}
       {...restProps}
     />
