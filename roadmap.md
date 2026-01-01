@@ -6,7 +6,7 @@
 6. Rewrigth components, to use more stabel emotion styles and better memorised logic -- DONE
 7. Add Storybook -- DONE
 8. Migrate formating and linting to biome.js -- DONE
-9. Update CI/CD pipelines (GitHub Actions) to run tests and linting
+9. Update CI/CD pipelines (GitHub Actions) to run tests and linting -- DONE
 10. Add commit-lint & Husky for conventional commits
 11. Add semantic-release to the pipelines
 12. Improve Test Coverage (add unit tests for hooks and formatting logic)
