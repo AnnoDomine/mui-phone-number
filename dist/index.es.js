@@ -6,8 +6,20 @@ import De from "@mui/material/Menu";
 import $e from "@mui/material/NativeSelect";
 import Le from "@mui/material/TextField";
 import * as Pe from "country-flag-icons/react/3x2";
-import { some as Se, startsWith as fe, filter as Ee, reduce as Ae, tail as Ge, head as Ue, find as ve, isString as Ve, findIndex as Ye, debounce as qe, includes as Ke, trim as We, map as ge } from "lodash";
-import He from "@mui/material/MenuItem";
+import ge from "lodash/map";
+import Ge from "@mui/material/MenuItem";
+import Ue from "lodash/debounce";
+import Ee from "lodash/filter";
+import ve from "lodash/find";
+import Ve from "lodash/findIndex";
+import Ye from "lodash/head";
+import qe from "lodash/includes";
+import Ke from "lodash/isString";
+import Ae from "lodash/reduce";
+import Se from "lodash/some";
+import fe from "lodash/startsWith";
+import We from "lodash/tail";
+import He from "lodash/trim";
 var be = { exports: {} }, de = {};
 var ye;
 function Je() {
@@ -18,8 +30,8 @@ function Je() {
     var p = null;
     if (c !== void 0 && (p = "" + c), f.key !== void 0 && (p = "" + f.key), "key" in f) {
       c = {};
-      for (var T in f)
-        T !== "key" && (c[T] = f[T]);
+      for (var R in f)
+        R !== "key" && (c[R] = f[R]);
     } else c = f;
     return f = c.ref, {
       $$typeof: l,
@@ -38,14 +50,14 @@ function Ze() {
     function l(e) {
       if (e == null) return null;
       if (typeof e == "function")
-        return e.$$typeof === oe ? null : e.displayName || e.name || null;
+        return e.$$typeof === te ? null : e.displayName || e.name || null;
       if (typeof e == "string") return e;
       switch (e) {
         case G:
           return "Fragment";
         case se:
           return "Profiler";
-        case ie:
+        case ne:
           return "StrictMode";
         case Z:
           return "Suspense";
@@ -60,7 +72,7 @@ function Ze() {
         ), e.$$typeof) {
           case A:
             return "Portal";
-          case te:
+          case ie:
             return e.displayName || "Context";
           case J:
             return (e._context.displayName || "Context") + ".Consumer";
@@ -123,7 +135,7 @@ function Ze() {
       }
       return e.key !== void 0;
     }
-    function T(e, r) {
+    function R(e, r) {
       function t() {
         O || (O = !0, console.error(
           "%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)",
@@ -135,7 +147,7 @@ function Ze() {
         configurable: !0
       });
     }
-    function R() {
+    function T() {
       var e = l(this.type);
       return F[e] || (F[e] = !0, console.error(
         "Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."
@@ -151,7 +163,7 @@ function Ze() {
         _owner: u
       }, (m !== void 0 ? m : null) !== null ? Object.defineProperty(e, "ref", {
         enumerable: !1,
-        get: R
+        get: T
       }) : Object.defineProperty(e, "ref", { enumerable: !1, value: null }), e._store = {}, Object.defineProperty(e._store, "validated", {
         configurable: !1,
         enumerable: !1,
@@ -210,7 +222,7 @@ React keys must be passed directly to JSX without using spread:
         for (var ee in r)
           ee !== "key" && (t[ee] = r[ee]);
       } else t = r;
-      return m && T(
+      return m && R(
         t,
         typeof e == "function" ? e.displayName || e.name || "Unknown" : e
       ), v(
@@ -228,7 +240,7 @@ React keys must be passed directly to JSX without using spread:
     function W(e) {
       return typeof e == "object" && e !== null && e.$$typeof === H;
     }
-    var M = Ne, H = /* @__PURE__ */ Symbol.for("react.transitional.element"), A = /* @__PURE__ */ Symbol.for("react.portal"), G = /* @__PURE__ */ Symbol.for("react.fragment"), ie = /* @__PURE__ */ Symbol.for("react.strict_mode"), se = /* @__PURE__ */ Symbol.for("react.profiler"), J = /* @__PURE__ */ Symbol.for("react.consumer"), te = /* @__PURE__ */ Symbol.for("react.context"), U = /* @__PURE__ */ Symbol.for("react.forward_ref"), Z = /* @__PURE__ */ Symbol.for("react.suspense"), V = /* @__PURE__ */ Symbol.for("react.suspense_list"), g = /* @__PURE__ */ Symbol.for("react.memo"), I = /* @__PURE__ */ Symbol.for("react.lazy"), B = /* @__PURE__ */ Symbol.for("react.activity"), oe = /* @__PURE__ */ Symbol.for("react.client.reference"), Y = M.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, j = Object.prototype.hasOwnProperty, X = Array.isArray, z = console.createTask ? console.createTask : function() {
+    var M = Ne, H = /* @__PURE__ */ Symbol.for("react.transitional.element"), A = /* @__PURE__ */ Symbol.for("react.portal"), G = /* @__PURE__ */ Symbol.for("react.fragment"), ne = /* @__PURE__ */ Symbol.for("react.strict_mode"), se = /* @__PURE__ */ Symbol.for("react.profiler"), J = /* @__PURE__ */ Symbol.for("react.consumer"), ie = /* @__PURE__ */ Symbol.for("react.context"), U = /* @__PURE__ */ Symbol.for("react.forward_ref"), Z = /* @__PURE__ */ Symbol.for("react.suspense"), V = /* @__PURE__ */ Symbol.for("react.suspense_list"), g = /* @__PURE__ */ Symbol.for("react.memo"), I = /* @__PURE__ */ Symbol.for("react.lazy"), B = /* @__PURE__ */ Symbol.for("react.activity"), te = /* @__PURE__ */ Symbol.for("react.client.reference"), Y = M.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, j = Object.prototype.hasOwnProperty, X = Array.isArray, z = console.createTask ? console.createTask : function() {
       return null;
     };
     M = {
@@ -294,9 +306,9 @@ const Qe = ({
         ]
       }
     );
-  const T = Pe[h.toUpperCase()];
+  const R = Pe[h.toUpperCase()];
   return /* @__PURE__ */ k.jsxs(
-    He,
+    Ge,
     {
       ref: f,
       className: "country",
@@ -304,12 +316,12 @@ const Qe = ({
       "data-country-code": h,
       ...p,
       children: [
-        !!T && /* @__PURE__ */ k.jsx(
+        !!R && /* @__PURE__ */ k.jsx(
           "div",
           {
             className: p.className,
             style: { width: 30, height: 24, paddingRight: 8 },
-            children: /* @__PURE__ */ k.jsx(T, {})
+            children: /* @__PURE__ */ k.jsx(R, {})
           }
         ),
         /* @__PURE__ */ k.jsx("span", { className: "country-name", children: d || l }),
@@ -922,34 +934,34 @@ function xe(l, h, C) {
 }
 const aa = [].concat(
   ...ea.map((l) => {
-    const [h, C, d, f, c, p, T] = l, R = {
+    const [h, C, d, f, c, p, R] = l, T = {
       name: h,
       regions: C,
       iso2: d,
       dialCode: f,
       priority: p || 0,
       format: c || void 0,
-      hasAreaCodes: !!T
+      hasAreaCodes: !!R
     }, v = [];
-    return R.hasAreaCodes && T && T.forEach((L) => {
+    return T.hasAreaCodes && R && R.forEach((L) => {
       const _ = {
-        ...R,
+        ...T,
         regions: C,
         dialCode: `${f}${L}`,
         isAreaCode: !0
       };
       v.push(_), xe(d, _.dialCode);
     }), xe(
-      R.iso2,
-      R.dialCode,
-      R.hasAreaCodes ? 1 : 0
-    ), v.length > 0 ? [R, ...v] : [R];
+      T.iso2,
+      T.dialCode,
+      T.hasAreaCodes ? 1 : 0
+    ), v.length > 0 ? [T, ...v] : [T];
   })
 ), Re = {
   allCountries: aa
 }, Ie = (l, h, C) => {
   const d = ve(h, { iso2: C }) || {};
-  if (We(l) === "") return d;
+  if (He(l) === "") return d;
   const f = Ae(
     h,
     (c, p) => fe(l, p.dialCode) && (p.dialCode.length > c.dialCode.length || p.dialCode.length === c.dialCode.length && p.priority < c.priority) ? p : c,
@@ -964,8 +976,8 @@ const aa = [].concat(
     disableAreaCodes: f = !1,
     disableCountryCode: c = !1,
     enableLongNumbers: p = !1,
-    excludeCountries: T = [],
-    isModernBrowser: R = () => document.createElement ? !!document.createElement("input").setSelectionRange : !1,
+    excludeCountries: R = [],
+    isModernBrowser: T = () => document.createElement ? !!document.createElement("input").setSelectionRange : !1,
     keys: v = {
       UP: 38,
       DOWN: 40,
@@ -985,10 +997,10 @@ const aa = [].concat(
     onBlur: H,
     onFocus: A,
     onClick: G,
-    placeholder: ie = "+1 (702) 123-4567",
+    placeholder: ne = "+1 (702) 123-4567",
     preferredCountries: se = [],
     regions: J = "",
-    isValid: te = (a) => Se(
+    isValid: ie = (a) => Se(
       Re.allCountries,
       (n) => fe(a, n.dialCode) || fe(n.dialCode, a)
     ),
@@ -997,25 +1009,25 @@ const aa = [].concat(
     let a = Re.allCountries;
     const n = (o) => o.filter((x) => x.isAreaCode !== !0), s = (o, x) => {
       if (typeof o == "string") {
-        const ne = o;
+        const re = o;
         return x.filter(
-          (he) => he.regions.some((le) => le === ne)
+          (he) => he.regions.some((le) => le === re)
         );
       }
-      return x.filter((ne) => o.map(
-        (le) => ne.regions.some((Oe) => Oe === le)
+      return x.filter((re) => o.map(
+        (le) => re.regions.some((Oe) => Oe === le)
       ).some((le) => le));
     }, b = (o, x) => o.length === 0 ? x : x.filter(
-      (ne) => o.some((he) => he === ne.iso2)
+      (re) => o.some((he) => he === re.iso2)
     ), E = (o, x) => x.length === 0 ? o : Ee(
       o,
-      (ne) => !Ke(x, ne.iso2)
+      (re) => !qe(x, re.iso2)
     );
     return f && (a = n(a)), J && (a = s(J, a)), E(
       b(L, a),
-      T
+      R
     );
-  }, [f, J, L, T]), I = ce(() => Ee(
+  }, [f, J, L, R]), I = ce(() => Ee(
     Re.allCountries,
     (a) => Se(
       se,
@@ -1034,8 +1046,8 @@ const aa = [].concat(
           formattedText: o.formattedText + x,
           remainingText: o.remainingText
         } : {
-          formattedText: o.formattedText + Ue(o.remainingText),
-          remainingText: Ge(o.remainingText)
+          formattedText: o.formattedText + Ye(o.remainingText),
+          remainingText: We(o.remainingText)
         },
         {
           formattedText: "",
@@ -1046,7 +1058,7 @@ const aa = [].concat(
       return p ? E = b.formattedText + b.remainingText.join("") : E = b.formattedText, E.includes("(") && !E.includes(")") && (E += ")"), E;
     },
     [c, h, p]
-  ), [oe, Y] = ue(null), [j, X] = ue(0), [z, O] = ue(""), [F, N] = ue(!1), [Q, q] = ue(ie), e = ce(() => {
+  ), [te, Y] = ue(null), [j, X] = ue(0), [z, O] = ue(""), [F, N] = ue(!1), [Q, q] = ue(ne), e = ce(() => {
     const a = U || "";
     let n;
     return a.length > 1 ? n = Ie(
@@ -1060,20 +1072,17 @@ const aa = [].concat(
       (c ? "" : n) + a.replace(/\D/g, ""),
       e.name ? e.format : void 0
     );
-  }, [U, e, c, B]), t = y(
-    (a) => a ? {
-      name: a.name || "",
-      dialCode: a.dialCode || "",
-      countryCode: a.iso2 || ""
-    } : {},
-    []
-  ), u = y(() => {
+  }, [U, e, c, B]), t = y((a) => a ? {
+    name: a.name || "",
+    dialCode: a.dialCode || "",
+    countryCode: a.iso2 || ""
+  } : {}, []), u = y(() => {
     const a = V.current;
-    if (a && (a.focus(), R && R())) {
+    if (a && (a.focus(), T?.())) {
       const n = a.value.length;
       a.setSelectionRange(n, n);
     }
-  }, [R]), K = y(
+  }, [T]), K = y(
     (a) => {
       let n = e, s = c ? "" : "+";
       if (!C) {
@@ -1089,14 +1098,19 @@ const aa = [].concat(
           o.substring(0, 6),
           g,
           d
-        ), N(!1)), s = B(o, n.format);
+        ), N(!1)), s = B(
+          o,
+          n.format
+        );
       }
       let b = a.target.selectionStart || 0;
       const E = s.length - r.length;
-      R && R() && requestAnimationFrame(() => {
+      T?.() && requestAnimationFrame(() => {
         const o = V.current;
         if (!o) return;
-        E > 0 && (b -= E), s.charAt(s.length - 1) === ")" ? o.setSelectionRange(
+        E > 0 && (b -= E), s.charAt(
+          s.length - 1
+        ) === ")" ? o.setSelectionRange(
           s.length - 1,
           s.length - 1
         ) : b > 0 && r.length >= s.length && o.setSelectionRange(b, b);
@@ -1111,13 +1125,16 @@ const aa = [].concat(
       g,
       d,
       B,
-      R,
+      T,
       _,
       t
     ]
   ), P = y(
     (a) => {
-      const n = Ve(a) ? ve(g, (o) => o.iso2 === a) : ve(g, a);
+      const n = Ke(a) ? ve(
+        g,
+        (o) => o.iso2 === a
+      ) : ve(g, a);
       if (!n) return;
       const s = r.replace(" ", "").replace("(", "").replace(")", "").replace("-", ""), b = s.length > 1 ? s.replace(
         e.dialCode,
@@ -1144,9 +1161,9 @@ const aa = [].concat(
     [A, u, t, e]
   ), w = y(
     (a) => {
-      a.target.value || q(ie || ""), H && H(a, t(e));
+      a.target.value || q(ne || ""), H && H(a, t(e));
     },
-    [ie, H, t, e]
+    [ne, H, t, e]
   ), ee = y(
     (a) => {
       G && G(a, t(e));
@@ -1159,25 +1176,34 @@ const aa = [].concat(
     [v, W, M]
   ), ae = y((a) => {
     !a || !a.parentElement || (a.parentElement.scrollTop = a.offsetTop);
-  }, []), re = y((a) => {
-    const n = g.length + I.length;
-    let s = j + a;
-    return (s < 0 || s >= n) && (s -= a), s;
-  }, [j, g, I]), pe = y(() => {
+  }, []), oe = y(
+    (a) => {
+      const n = g.length + I.length;
+      let s = j + a;
+      return (s < 0 || s >= n) && (s -= a), s;
+    },
+    [j, g, I]
+  ), pe = y(() => {
     const n = ((E) => !E || E.length === 0 ? null : Ee(
       g,
       (o) => fe(o.name.toLowerCase(), E.toLowerCase())
-    )[0])(z) || g[0], s = Ye(g, n) + I.length, b = Z.current[`flag_no_${s}`];
+    )[0])(z) || g[0], s = Ve(g, n) + I.length, b = Z.current[`flag_no_${s}`];
     ae(b), O(""), X(s);
-  }, [z, g, I, ae]), i = ce(
-    () => qe(pe, 100),
+  }, [
+    z,
+    g,
+    I,
+    ae
+  ]), i = ce(
+    () => Ue(pe, 100),
     [pe]
   ), S = y(
+    // biome-ignore lint/suspicious/noExplicitAny: event type --- IGNORE ---
     (a) => {
-      if (!oe || l.disabled || !v) return;
+      if (!te || l.disabled || !v) return;
       a.preventDefault && a.preventDefault();
       const n = (s) => {
-        const b = re(s);
+        const b = oe(s);
         X(b);
         const E = Z.current[`flag_no_${b}`];
         ae(E);
@@ -1205,7 +1231,7 @@ const aa = [].concat(
       }
     },
     [
-      oe,
+      te,
       j,
       l.disabled,
       v,
@@ -1215,7 +1241,7 @@ const aa = [].concat(
       u,
       i,
       ae,
-      re
+      oe
     ]
   );
   Fe(() => (document.addEventListener("keydown", S), () => document.removeEventListener("keydown", S)), [S]);
@@ -1224,14 +1250,14 @@ const aa = [].concat(
       V.current = a, l.inputRef && (typeof l.inputRef == "function" ? l.inputRef(a) : l.inputRef.current = a);
     },
     [l.inputRef]
-  ), je = y(() => te ? te(r.replace(/\D/g, "")) : !0, [te, r]);
+  ), je = y(() => ie ? ie(r.replace(/\D/g, "")) : !0, [ie, r]);
   return {
     formattedNumber: r,
     selectedCountry: e,
     highlightCountryIndex: j,
     queryString: z,
     freezeSelection: F,
-    anchorEl: oe,
+    anchorEl: te,
     placeholder: Q,
     computedOnlyCountries: g,
     computedPreferredCountries: I,
@@ -1252,7 +1278,7 @@ const aa = [].concat(
     handleFlagItemClick: P,
     isValid: je
   };
-}, ma = (l) => {
+}, Sa = (l) => {
   const {
     autoFormat: h,
     classes: C,
@@ -1260,8 +1286,8 @@ const aa = [].concat(
     defaultCountry: f,
     disableAreaCodes: c,
     disableCountryCode: p,
-    disableDropdown: T,
-    dropdownClass: R,
+    disableDropdown: R,
+    dropdownClass: T,
     enableLongNumbers: v,
     excludeCountries: L,
     inputClass: _,
@@ -1270,17 +1296,17 @@ const aa = [].concat(
     regions: H,
     localization: A,
     isValid: G,
-    isModernBrowser: ie,
+    isModernBrowser: ne,
     keys: se,
     native: J,
-    onEnterKeyPress: te,
+    onEnterKeyPress: ie,
     error: U,
     InputProps: Z,
     variant: V = "standard",
     onChange: g,
     onFocus: I,
     onBlur: B,
-    onClick: oe,
+    onClick: te,
     onKeyDown: Y,
     ...j
   } = l, {
@@ -1289,7 +1315,6 @@ const aa = [].concat(
     selectedCountry: O,
     anchorEl: F,
     flagsRef: N,
-    // biome-ignore lint/correctness/noUnusedVariables: inputRef from hook is passed correctly to TextField as handleRefInput
     setAnchorEl: Q,
     handleInput: q,
     handleInputClick: e,
@@ -1320,14 +1345,14 @@ const aa = [].concat(
       height: 24,
       paddingRight: 8
     }
-  }, ae = (i) => !!(O && O.dialCode === i.dialCode), re = Pe[O.iso2.toUpperCase()], pe = T ? {} : {
+  }, ae = (i) => !!(O && O.dialCode === i.dialCode), oe = Pe[O.iso2.toUpperCase()] || void 0, pe = R ? {} : {
     startAdornment: /* @__PURE__ */ k.jsx(ze, { style: D.positionStart, position: "start", children: J ? /* @__PURE__ */ k.jsxs(
       $e,
       {
         id: "country-menu",
         style: D.native,
         onChange: (i) => P(i.target.value),
-        IconComponent: !!re && re,
+        IconComponent: oe,
         disableUnderline: !0,
         children: [
           !!w.length && ge(
@@ -1375,13 +1400,13 @@ const aa = [].concat(
           "aria-label": "Select country",
           onClick: (i) => Q(i.currentTarget),
           "aria-haspopup": !0,
-          children: !!re && /* @__PURE__ */ k.jsx(re, { className: "margin" })
+          children: !!oe && /* @__PURE__ */ k.jsx(oe, { className: "margin" })
         }
       ),
       /* @__PURE__ */ k.jsxs(
         De,
         {
-          className: R,
+          className: T,
           id: "country-menu",
           anchorEl: F,
           open: !!F,
@@ -1455,5 +1480,5 @@ const aa = [].concat(
   );
 };
 export {
-  ma as default
+  Sa as default
 };

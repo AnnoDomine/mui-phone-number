@@ -1,17 +1,15 @@
-import {
-  debounce,
-  filter,
-  find,
-  findIndex,
-  head,
-  includes,
-  isString,
-  reduce,
-  some,
-  startsWith,
-  tail,
-  trim,
-} from 'lodash';
+import debounce from 'lodash/debounce';
+import filter from 'lodash/filter';
+import find from 'lodash/find';
+import findIndex from 'lodash/findIndex';
+import head from 'lodash/head';
+import includes from 'lodash/includes';
+import isString from 'lodash/isString';
+import reduce from 'lodash/reduce';
+import some from 'lodash/some';
+import startsWith from 'lodash/startsWith';
+import tail from 'lodash/tail';
+import trim from 'lodash/trim';
 import type React from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import countryData, { type Country } from '../../country_data';

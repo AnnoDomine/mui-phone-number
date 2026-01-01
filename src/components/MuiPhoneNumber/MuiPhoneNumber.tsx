@@ -5,7 +5,7 @@ import Menu from '@mui/material/Menu';
 import NativeSelect from '@mui/material/NativeSelect';
 import TextField from '@mui/material/TextField';
 import * as Flags from 'country-flag-icons/react/3x2';
-import { map } from 'lodash';
+import map from 'lodash/map';
 import type React from 'react';
 import type { Country } from '../../country_data';
 import Item from './components/Item/Item';

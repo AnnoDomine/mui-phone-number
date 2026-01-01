@@ -24,7 +24,7 @@ export default defineConfig({
       fileName: format => `index.${format}.js`
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'lodash', '@mui/material', '@mui/material/TextField', '@mui/material/InputAdornment', '@mui/material/IconButton', '@mui/material/Menu', '@mui/material/Divider', '@mui/material/NativeSelect', '@mui/material/MenuItem', 'clsx', 'prop-types', 'country-flag-icons', 'country-flag-icons/react/3x2'],
+      external: ['react', 'react-dom', 'lodash', /^lodash\/.*/, '@mui/material', '@mui/material/TextField', '@mui/material/InputAdornment', '@mui/material/IconButton', '@mui/material/Menu', '@mui/material/Divider', '@mui/material/NativeSelect', '@mui/material/MenuItem', 'clsx', 'prop-types', 'country-flag-icons', 'country-flag-icons/react/3x2'],
       output: {
         globals: {
           react: 'React',

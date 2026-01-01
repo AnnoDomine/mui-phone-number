@@ -55,3 +55,11 @@ export interface MuiPhoneNumberState {
     freezeSelection: boolean;
     anchorEl: HTMLElement | null;
 }
+type HTMLSVGElement = HTMLElement & SVGElement;
+interface ElementAttributes<T> extends React.HTMLAttributes<T>, React.SVGAttributes<T> {
+}
+interface Props extends ElementAttributes<HTMLSVGElement> {
+}
+export type FlagComponent = (props: Props) => React.JSX.Element;
+export type FlagMap = Record<string, FlagComponent>;
+export {};

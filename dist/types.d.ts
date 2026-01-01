@@ -1,7 +1,7 @@
 import { TextFieldProps } from '@mui/material';
 import { Country } from './country_data';
 
-import * as React from 'react';
+import type * as React from 'react';
 export type { Country };
 export type MuiPhoneNumberProps = Omit<TextFieldProps, 'onChange'> & {
     autoFormat?: boolean;
