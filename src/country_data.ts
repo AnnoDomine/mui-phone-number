@@ -16,7 +16,18 @@
 // ['north-america', 'south-america', 'central-america', 'carribean',
 //  'european-union', 'ex-ussr', 'middle-east', 'north-africa']
 
-const rawAllCountries = [
+export interface Country {
+  name: string;
+  regions: string[];
+  iso2: string;
+  dialCode: string;
+  priority: number;
+  format?: string;
+  hasAreaCodes?: boolean;
+  isAreaCode?: boolean;
+}
+
+const rawAllCountries: (string | string[] | number | undefined)[][] = [
   ['Afghanistan', ['asia'], 'af', '93'],
   ['Albania', ['europe'], 'al', '355'],
   ['Algeria', ['africa', 'north-africa'], 'dz', '213'],
@@ -614,9 +625,9 @@ const rawAllCountries = [
   ['Zimbabwe', ['africa'], 'zw', '263'],
 ];
 
-const allCountryCodes = {};
+const allCountryCodes: { [key: string]: string[] } = {};
 
-function addCountryCode(iso2, dialCode, priority) {
+function addCountryCode(iso2: string, dialCode: string, priority?: number) {
   if (!(dialCode in allCountryCodes)) {
     allCountryCodes[dialCode] = [];
   }
@@ -624,26 +635,34 @@ function addCountryCode(iso2, dialCode, priority) {
   allCountryCodes[dialCode][index] = iso2;
 }
 
-const allCountries = [].concat(
+const allCountries: Country[] = ([] as Country[]).concat(
   ...rawAllCountries.map((country) => {
     const [name, regions, iso2, dialCode, format, priority, areaCodes] =
-      country;
+      country as [
+        string,
+        string[],
+        string,
+        string,
+        string | undefined,
+        number | undefined,
+        string[] | undefined,
+      ];
 
-    const countryItem = {
+    const countryItem: Country = {
       name,
       regions,
       iso2,
       dialCode,
-      priority,
+      priority: priority || 0,
       format: format || undefined,
-      hasAreaCodes: areaCodes,
+      hasAreaCodes: !!areaCodes,
     };
 
-    const areaItems = [];
+    const areaItems: Country[] = [];
 
-    if (countryItem.hasAreaCodes) {
+    if (countryItem.hasAreaCodes && areaCodes) {
       areaCodes.forEach((areaCode) => {
-        const areaItem = {
+        const areaItem: Country = {
           ...countryItem,
           regions,
           dialCode: `${dialCode}${areaCode}`,
@@ -659,7 +678,7 @@ const allCountries = [].concat(
     addCountryCode(
       countryItem.iso2,
       countryItem.dialCode,
-      countryItem.hasAreaCodes,
+      countryItem.hasAreaCodes ? 1 : 0,
     );
 
     return areaItems.length > 0 ? [countryItem, ...areaItems] : [countryItem];

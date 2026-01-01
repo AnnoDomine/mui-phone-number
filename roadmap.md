@@ -7,3 +7,4 @@
 7. Add Storybook -- DONE
 8. Migrate formating and linting to biome.js -- DONE
 9. Add sematic-release to the pipelines
+10. Add commit-lint for commit conventional commits, lint and formating check
