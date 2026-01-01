@@ -14,15 +14,34 @@ import type { MuiPhoneNumberProps } from './MuiPhoneNumber.types';
 
 const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
   const {
+    autoFormat,
     classes,
-    dropdownClass,
+    countryCodeEditable,
+    defaultCountry,
+    disableAreaCodes,
+    disableCountryCode,
     disableDropdown,
-    native,
-    localization,
+    dropdownClass,
+    enableLongNumbers,
+    excludeCountries,
     inputClass,
+    onlyCountries,
+    preferredCountries,
+    regions,
+    localization,
+    isValid: propsIsValid,
+    isModernBrowser,
+    keys,
+    native,
+    onEnterKeyPress,
     error,
     InputProps: externalInputProps,
     variant = 'standard',
+    onChange,
+    onFocus,
+    onBlur,
+    onClick,
+    onKeyDown,
     ...restProps
   } = props;
 
