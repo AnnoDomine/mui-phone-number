@@ -100,7 +100,9 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
     Boolean(selectedCountry && selectedCountry.dialCode === country.dialCode);
 
   const FlagComponent =
-    (Flags as FlagMap)[selectedCountry.iso2.toUpperCase()] || undefined;
+    selectedCountry.iso2
+      ? (Flags as FlagMap)[selectedCountry.iso2.toUpperCase()]
+      : undefined;
 
   const dropdownProps = disableDropdown
     ? {}
@@ -137,9 +139,11 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
                   computedOnlyCountries,
                   (country: Country, index: number) => (
                     <Item
-                      key={`preferred_${country.iso2}_${index}`}
+                      key={`country_${country.iso2}_${index}`}
                       itemRef={(node) => {
-                        flagsRef.current[`flag_no_${index}`] = node;
+                        flagsRef.current[
+                          `flag_no_${index + computedPreferredCountries.length}`
+                        ] = node;
                       }}
                       name={country.name}
                       iso2={country.iso2}
@@ -197,9 +201,11 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
                     computedOnlyCountries,
                     (country: Country, index: number) => (
                       <Item
-                        key={`preferred_${country.iso2}_${index}`}
+                        key={`country_${country.iso2}_${index}`}
                         itemRef={(node) => {
-                          flagsRef.current[`flag_no_${index}`] = node;
+                          flagsRef.current[
+                            `flag_no_${index + computedPreferredCountries.length}`
+                          ] = node;
                         }}
                         selected={isSelected(country)}
                         onClick={() => handleFlagItemClick(country)}

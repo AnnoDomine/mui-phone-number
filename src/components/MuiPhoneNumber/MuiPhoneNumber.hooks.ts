@@ -97,6 +97,19 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
   const flagsRef = useRef<{ [key: string]: HTMLElement | null }>({});
   const inputRef = useRef<HTMLInputElement | null>(null);
 
+  // -- Internal State for the phone number (to support uncontrolled usage) --
+  const [internalValue, setInternalValue] = useState(value || '');
+
+  // Synchronize internal value if props.value changes
+  useEffect(() => {
+    if (value !== undefined) {
+      setInternalValue(value);
+    }
+  }, [value]);
+
+  // Use the effective value (prop or internal state)
+  const effectiveValue = value !== undefined ? value : internalValue;
+
   // -- Memoized Data Transformers --
 
   const computedOnlyCountries = useMemo(() => {
@@ -148,19 +161,27 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
       filteredCountries = deleteAreaCodes(filteredCountries);
     if (regions) filteredCountries = filterRegions(regions, filteredCountries);
 
-    return excludeCountriesFunc(
-      getOnlyCountriesFunc(propsOnlyCountries, filteredCountries),
-      excludeCountries,
+    const baseOnlyCountries = getOnlyCountriesFunc(
+      propsOnlyCountries,
+      filteredCountries,
     );
-  }, [disableAreaCodes, regions, propsOnlyCountries, excludeCountries]);
+
+    return excludeCountriesFunc(baseOnlyCountries, [
+      ...excludeCountries,
+      ...propsPreferredCountries,
+    ]);
+  }, [
+    disableAreaCodes,
+    regions,
+    propsOnlyCountries,
+    excludeCountries,
+    propsPreferredCountries,
+  ]);
 
   const computedPreferredCountries = useMemo(() => {
-    return filter(countryData.allCountries, (country) =>
-      some(
-        propsPreferredCountries,
-        (preferredCountry) => preferredCountry === country.iso2,
-      ),
-    );
+    return propsPreferredCountries
+      .map((iso) => find(countryData.allCountries, { iso2: iso }))
+      .filter(Boolean) as Country[];
   }, [propsPreferredCountries]);
 
   // -- Helpers (Pure Logic) --
@@ -241,7 +262,7 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
   // -- Derived State (from props and internal UI state) --
 
   const selectedCountry = useMemo(() => {
-    const inputNum = (value as string) || '';
+    const inputNum = (effectiveValue as string) || '';
     let country: Country | undefined;
 
     if (inputNum.length > 1) {
@@ -256,13 +277,19 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
     }
 
     if (!country || !country.dialCode) {
-      country = { dialCode: '', priority: 10001 } as Country;
+      country = {
+        dialCode: '',
+        priority: 10001,
+        iso2: '',
+        name: '',
+        regions: [],
+      } as Country;
     }
     return country;
-  }, [value, computedOnlyCountries, defaultCountry]);
+  }, [effectiveValue, computedOnlyCountries, defaultCountry]);
 
   const formattedNumber = useMemo(() => {
-    const inputNum = (value as string) || '';
+    const inputNum = (effectiveValue as string) || '';
     const dialCode =
       inputNum.length < 2 &&
       selectedCountry &&
@@ -277,7 +304,7 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
           (disableCountryCode ? '' : dialCode) + inputNum.replace(/\D/g, ''),
           selectedCountry.name ? selectedCountry.format : undefined,
         );
-  }, [value, selectedCountry, disableCountryCode, formatDisplayedNumber]);
+  }, [effectiveValue, selectedCountry, disableCountryCode, formatDisplayedNumber]);
 
   // -- Handlers --
 
@@ -370,6 +397,8 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
         });
       }
 
+      setInternalValue(newFormattedNumber);
+
       if (onChange) {
         onChange(newFormattedNumber, getCountryData(currentSelectedCountry));
       }
@@ -417,6 +446,8 @@ export const useMuiPhoneNumber = (props: MuiPhoneNumberProps) => {
         newNumber.replace(/\D/g, ''),
         nextSelectedCountry.format,
       );
+
+      setInternalValue(newFormattedNumber);
 
       if (onChange) {
         onChange(newFormattedNumber, getCountryData(nextSelectedCountry));
