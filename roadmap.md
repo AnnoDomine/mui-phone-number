@@ -2,7 +2,7 @@
 2. Update MUI to latest version and migrate -- DONE
 3. Add Unit tests -- DONE
 4. Update ReactJS version and migrate -- DONE
-5. Add typescript support
+5. Add typescript support -- DONE
 6. Rewrigth components, to use more stabel emotion styles and better memorised logic
 7. Add Storybook -- DONE
 8. Migrate formating and linting to biome.js -- DONE
