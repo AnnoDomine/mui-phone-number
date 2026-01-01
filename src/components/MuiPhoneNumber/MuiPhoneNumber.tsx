@@ -99,10 +99,9 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
   const isSelected = (country: Country) =>
     Boolean(selectedCountry && selectedCountry.dialCode === country.dialCode);
 
-  const FlagComponent =
-    selectedCountry.iso2
-      ? (Flags as FlagMap)[selectedCountry.iso2.toUpperCase()]
-      : undefined;
+  const FlagComponent = selectedCountry.iso2
+    ? (Flags as FlagMap)[selectedCountry.iso2.toUpperCase()]
+    : undefined;
 
   const dropdownProps = disableDropdown
     ? {}
@@ -163,9 +162,7 @@ const MuiPhoneNumber: React.FC<MuiPhoneNumberProps> = (props) => {
                   onClick={(e) => setAnchorEl(e.currentTarget)}
                   aria-haspopup
                 >
-                  {Boolean(FlagComponent) && (
-                    <FlagComponent className="margin" />
-                  )}
+                  {!!FlagComponent && <FlagComponent className="margin" />}
                 </IconButton>
 
                 <Menu
