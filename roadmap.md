@@ -8,9 +8,9 @@
 8. Migrate formating and linting to biome.js -- DONE
 9. Update CI/CD pipelines (GitHub Actions) to run tests and linting -- DONE
 10. Add commit-lint & Husky for conventional commits -- DONE
-11. Add semantic-release to the pipelines
-12. Improve Test Coverage (add unit tests for hooks and formatting logic)
-13. Update README.md
+11. Add semantic-release to the pipelines -- DONE
+12. Improve Test Coverage (add unit tests for hooks and formatting logic) -- DONE
+13. Update README.md -- DONE
 
 commit convetion:
 ```bash
