@@ -1,8 +1,9 @@
-import { TextFieldProps } from "@mui/material";
-import * as React from "react";
+import { TextFieldProps } from '@mui/material';
+import * as React from 'react';
 
 export type MuiPhoneNumberProps = TextFieldProps & {
   autoFormat?: boolean;
+  // biome-ignore lint/suspicious/noExplicitAny: complex MUI type
   classes?: any;
   countryCodeEditable?: boolean;
   defaultCountry?: string;
@@ -14,7 +15,7 @@ export type MuiPhoneNumberProps = TextFieldProps & {
   excludeCountries?: string[];
   inputClass?: string;
   onChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string,
   ) => void;
   onlyCountries?: string[];
   preferredCountries?: string[];

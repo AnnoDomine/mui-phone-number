@@ -4,6 +4,6 @@
 4. Update ReactJS version and migrate -- DONE
 5. Add typescript support
 6. Rewrigth components, to use more stabel emotion styles and better memorised logic
-7. Add Storybook
-8. Migrate formating and linting to biome.js
+7. Add Storybook -- DONE
+8. Migrate formating and linting to biome.js -- DONE
 9. Add sematic-release to the pipelines

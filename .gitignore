@@ -4,3 +4,5 @@ package-lock.json
 animation.gif
 ./package-lock.json
 .vscode/
+*storybook.log
+storybook-static
