@@ -11,7 +11,6 @@ describe('MuiPhoneNumber UI tests', () => {
   };
 
   it('should render and allow typing', async () => {
-    const user = userEvent.setup();
     render(<ControlledWrapper defaultCountry="us" />);
     
     const input = screen.getByRole('textbox');
