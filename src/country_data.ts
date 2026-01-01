@@ -1564,7 +1564,7 @@ const allCountries = [].concat(...rawAllCountries.map((country) => {
   return (areaItems.length > 0) ? [countryItem, ...areaItems] : [countryItem];
 }));
 
-module.exports = {
+export default {
   allCountries,
   allCountryCodes,
 };
