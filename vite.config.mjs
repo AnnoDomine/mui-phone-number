@@ -86,6 +86,23 @@ export default defineConfig({
         },
       },
       {
+        name: 'ui',
+        extends: true,
+        test: {
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: playwright({}),
+            instances: [
+              {
+                browser: 'chromium',
+              },
+            ],
+          },
+          include: ['src/**/*.spec.{ts,tsx}'],
+        },
+      },
+      {
         extends: true,
         plugins: [
           // The plugin will run tests for the stories defined in your Storybook config

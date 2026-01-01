@@ -17,7 +17,7 @@ const Item: React.FC<ItemProps> = ({
     return (
       <option
         className="country"
-        data-dial-code="1"
+        data-dial-code={dialCode}
         data-country-code={iso2}
         value={iso2}
         {...restProps}
@@ -35,7 +35,7 @@ const Item: React.FC<ItemProps> = ({
     <MenuItem
       ref={itemRef}
       className="country"
-      data-dial-code="1"
+      data-dial-code={dialCode}
       data-country-code={iso2}
       {...restProps}
     >
@@ -49,7 +49,7 @@ const Item: React.FC<ItemProps> = ({
       )}
 
       <span className="country-name">{localization || name}</span>
-
+      {' '}
       <span className="dial-code">{`+${dialCode}`}</span>
     </MenuItem>
   );

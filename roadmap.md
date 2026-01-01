@@ -41,3 +41,5 @@ unit: Changes within unit-tests
 component: Changes within the components, component hooks anmd other relations
 env: Changes to environment (e.g. biome-config, node version, ...)
 ```
+
+14. Adding UI test to ensure the component is working like expected from UI side -- DONE
